@@ -7,8 +7,8 @@ public class JDBCExample {
    static final String DB_URL = "jdbc:oracle:thin:@cloud-34-133.eci.ucsb.edu:1521:XE";
 
    //  Database credentials
-   static final String USERNAME = "chansonlee";
-   static final String PASSWORD = "8Kk31891";
+   static final String USERNAME = "ajitvijayakumar";
+   static final String PASSWORD = "12Vijay99!";
    
    public static void main(String[] args) {
    Connection conn = null;
