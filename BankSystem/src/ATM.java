@@ -8,6 +8,7 @@ public class ATM {
 
 	public ATM() {
 		// TODO Auto-generated method stub
+		new ATMFunctions();
 		JFrame atm = new JFrame("ATM Interface");
 		atm.setSize(500,100);
 		atm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
