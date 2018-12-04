@@ -40,6 +40,9 @@ public class Bank {
 					
 					//compare the teller_id and teller_password to the BankTellerAccounts table
 					
+					bank.dispose();
+					new Bank_Options();
+					
 			}
         	
         });
