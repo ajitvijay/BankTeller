@@ -77,7 +77,72 @@ public class Bank_Options {
 				new Bank_Check();
 			}
         });
-		
+	    month_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//GENERATE MONTHLY STATEMENT
+			}
+        });
+	    closed_accounts_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//GENERATE ALL CLOSED ACCOUNTS
+			}
+        });
+	    govt_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//GENERATE GOVERNMENT REPORT
+			}
+        });
+	    report_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				options_frame.dispose();
+				new Bank_CustReport();
+			}
+        });
+	    
+	    interest_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//ADD INTEREST TO ALL ACCOUNTS
+			}
+        });
+	    acc_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CREATE A NEW ACCOUNT
+				options_frame.dispose();
+				new Bank_AddAccount();
+			}
+        });
+	    cust_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				options_frame.dispose();
+				new Bank_AddCustomer();
+			}
+        });
+	    custacc_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				options_frame.dispose();
+				new Bank_AddCustomerAccount();
+			}
+        }); 
+	    delete_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// delete all closed accounts and customers
+			}
+        }); 
+	    delete_trans_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//delete all transactions from each other the accounts in the past month
+			}
+        });
 		
 	}
 }
