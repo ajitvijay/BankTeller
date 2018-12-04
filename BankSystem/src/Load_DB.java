@@ -5,14 +5,8 @@ import java.io.IOException;
 
 public class Load_DB{
 	
-	static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";  
-	static final String DB_URL = "jdbc:oracle:thin:@cloud-34-133.eci.ucsb.edu:1521:XE";
-
-	   //  Database credentials
-	static final String USERNAME = "ajitvijayakumar";
-	static final String PASSWORD = "12Vijay99!";
-	
 	public static void main (String [] args) {
+	
 		try {
 			Class.forName(JDBC_DRIVER);
 
@@ -20,6 +14,9 @@ public class Load_DB{
 		      System.out.println("Connecting to a selected database...");
 		      conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
 		      System.out.println("Connected database successfully...");
+		      
+			  System.out.println("Creating Accounts table...");
+			    stmt = conn.createStatement();
 		      
 		      populate_accounts_table("input_csv/accounts.csv");
 
@@ -51,13 +48,8 @@ public class Load_DB{
 	
 	public static void populate_accounts_table(String filename) {
 		String line="";
-		Connection conn = null;
-		Statement stmt = null;
-		
-		System.out.println("Creating Accounts table...");
-	    stmt = conn.createStatement();
 	      
-	      try (BufferedReader buff = new BufferedReader(new FileReader("input_csv/accounts.csv"))){
+	      try (BufferedReader buff = new BufferedReader(new FileReader(filename))){
 	    	  while((line = buff.readLine()) != null) {
 	    		  String[] cols = line.split(",");
 	    		  
