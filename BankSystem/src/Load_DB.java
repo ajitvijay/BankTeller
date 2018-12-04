@@ -7,46 +7,13 @@ public class Load_DB{
 	
 	public static void main (String [] args) {
 	
-		try {
-			Class.forName(JDBC_DRIVER);
-
-		      //STEP 3: Open a connection
-		      System.out.println("Connecting to a selected database...");
-		      conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-		      System.out.println("Connected database successfully...");
-		      
-			  System.out.println("Creating Accounts table...");
-			    stmt = conn.createStatement();
-		      
-		      populate_accounts_table("input_csv/accounts.csv");
-
-		      
+		Connection db = DatabaseConnector(); 
 		
-		}
-		catch(SQLException se){
-		      //Handle errors for JDBC
-		      se.printStackTrace();
-		   }catch(Exception e){
-		      //Handle errors for Class.forName
-		      e.printStackTrace();
-		   }finally{
-		      //finally block used to close resources
-		      try{
-		         if(stmt!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		      }// do nothing
-		      try{
-		         if(conn!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		         se.printStackTrace();
-		      }//end finally try
-	    
-		   }
+		populate_accounts_table("input_csv/accounts.csv", db);
+		//populate_customers_table("input_csv/customers.csv");
 	}
 	
-	public static void populate_accounts_table(String filename) {
+	public static void populate_accounts_table(String filename, Connection db) {
 		String line="";
 	      
 	      try (BufferedReader buff = new BufferedReader(new FileReader(filename))){
@@ -75,8 +42,32 @@ public class Load_DB{
 		    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
 		    		  		+ "pocket_linked_account_id) VALUES ('xxxxx','265','student_checking', 3553.50, 1.02, 'open', NULL, 'no', 0.0, NULL)";
 	    		  
-	    		  ResultSet rs = stmt.executeQuery(query);
-	    		  rs.close();
+	    		  db.query(query);
+	    	  }
+	      }
+	      catch (IOException e) {
+	    	  e.printStackTrace();
+	      }
+	}
+	
+	/*
+	public static void populate_customers_table(String filename) {
+		String line="";
+	      
+	      try (BufferedReader buff = new BufferedReader(new FileReader(filename))){
+	    	  while((line = buff.readLine()) != null) {
+	    		  String[] cols = line.split(",");
+	    		  
+	    		  String branch_name = cols[0];
+	    		  
+	    		  
+	
+	    		  
+	    		  String query = "INSERT INTO Customer (branch_name, account_id, account_type, balance, "
+		    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+		    		  		+ "pocket_linked_account_id) VALUES ('xxxxx','265','student_checking', 3553.50, 1.02, 'open', NULL, 'no', 0.0, NULL)";
+	    		  
+	    		  db.query(query);
 	    	  }
 	      }
 	      catch (IOException e) {
@@ -85,7 +76,7 @@ public class Load_DB{
 		
 		
 	
-	}
+	}*/
 	
 	
 }
