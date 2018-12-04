@@ -12,6 +12,7 @@ public class DatabaseConnection {
 		      Class.forName(JDBC_DRIVER);
 		      System.out.println("Connecting to a selected database...");
 		      Connection conn = DriverManager.getConnection(DB_URL, "ajitvijayakumar", "12Vijay99!");
+		      //comment
 		      return conn;
 		    }
 		    catch(SQLException se) {

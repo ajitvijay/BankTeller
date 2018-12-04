@@ -1,5 +1,8 @@
 import java.sql.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class ATMFunctions {
@@ -9,17 +12,116 @@ public class ATMFunctions {
 		
 		JPanel panel = new JPanel();
 		JPanel panel2 = new JPanel();
-		JButton deposit = new JButton("Deposit");
-		JButton top_up = new JButton("Top Up");
-		JButton withdraw = new JButton("Withdraw");
-		JButton purchase = new JButton("Purchase");
-		JButton transfer = new JButton("Transfer");
-		JButton collect = new JButton("Collect");
-		JButton pay_friend = new JButton("Pay Friend");
-		JButton wire = new JButton("Wire");
-		JButton write_check = new JButton("Write Check");
-		JButton accrue_interest = new JButton("Accrue Interest");
 		
+		JButton deposit = new JButton("Deposit");
+		deposit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Deposit();
+			}
+			
+		});
+		
+		JButton top_up = new JButton("Top Up");
+		top_up.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new TopUp();
+			}
+			
+		});
+		
+		JButton withdraw = new JButton("Withdraw");
+		withdraw.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Withdraw();
+			}
+			
+		});
+		
+		JButton purchase = new JButton("Purchase");
+		purchase.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Purchase();
+			}
+			
+		});
+		
+		JButton transfer = new JButton("Transfer");
+		transfer.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Transfer();
+			}
+			
+		});
+		
+		JButton collect = new JButton("Collect");
+		collect.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Collect();
+			}
+			
+		});
+		
+		JButton pay_friend = new JButton("Pay Friend");
+		pay_friend.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new PayFriend();
+			}
+			
+		});
+		
+		JButton wire = new JButton("Wire");
+		wire.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Wire();
+			}
+			
+		});
+		
+		JButton write_check = new JButton("Write Check");
+		write_check.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new WriteCheck();
+			}
+			
+		});
+		
+		JButton accrue_interest = new JButton("Accrue Interest");
+		accrue_interest.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new AccrueInterest();
+			}
+			
+		});
 		
 		panel.add(BorderLayout.NORTH,deposit); 
 		panel.add(BorderLayout.AFTER_LINE_ENDS,top_up);
