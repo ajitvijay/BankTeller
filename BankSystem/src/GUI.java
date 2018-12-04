@@ -20,6 +20,7 @@ public class GUI {
         		// TODO Auto-generated method stub
         		frame.dispose();
         		new DatabaseConnection();
+
         		new ATM();
         	}
         	

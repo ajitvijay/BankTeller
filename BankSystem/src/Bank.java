@@ -11,5 +11,6 @@ public class Bank {
 		JLabel bankheader = new JLabel("Welcome to Bank Teller Interface");
 		bank.getContentPane().add(BorderLayout.NORTH,bankheader);
 		bank.setVisible(true);
+		new ATMFunctions();
 	}
 }
