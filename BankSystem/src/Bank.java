@@ -1,9 +1,10 @@
 import java.awt.*;
-
+import java.sql.*;
 import javax.swing.*;
 
 public class Bank {
-	Bank() {
+	
+	public Bank() {
 		JFrame bank = new JFrame("Bank Teller");
 		bank.setSize(500, 500);
 		bank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

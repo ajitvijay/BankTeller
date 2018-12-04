@@ -1,6 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.*;
 import javax.swing.*;
 
 public class GUI {
@@ -19,6 +19,7 @@ public class GUI {
         	public void actionPerformed(ActionEvent e) {
         		// TODO Auto-generated method stub
         		frame.dispose();
+        		new DatabaseConnection();
         		new ATM();
         	}
         	
@@ -29,6 +30,7 @@ public class GUI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		frame.dispose();
+        		new DatabaseConnection();
         		new Bank();
         	}
         });
