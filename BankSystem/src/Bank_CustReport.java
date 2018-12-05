@@ -32,7 +32,7 @@ public class Bank_CustReport {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String customer_id = cust_input.getText();
-				System.out.print("Customer Report for the customer id: " + customer_id);
+				//System.out.print("Customer Report for the customer id: " + customer_id);
 				frame.dispose();
 				new Bank_Options();
 				generate_customer_report(customer_id, db);
@@ -54,7 +54,7 @@ public class Bank_CustReport {
 			
 			ResultSet rs = db.querySelect(query);
 			
-			System.out.println("GENERATING CUSTOMER REPORT for Customer: " + customer_id);
+			System.out.println("\nGENERATING CUSTOMER REPORT for Customer: " + customer_id);
 			
 		    while(rs.next()){	    
 		        //Retrieve by column name
