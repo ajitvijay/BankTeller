@@ -10,7 +10,7 @@ public class Deposit {
 			String query = "UPDATE Account SET balance = balance + " + value + " WHERE account_id = '" + account_id + "'";
 			//String query = "UPDATE Account SET balance = balance - 3000 WHERE account_id = '265'";
 			System.out.println(query);
-			db.query(query);
+			db.queryUpdate(query);
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();

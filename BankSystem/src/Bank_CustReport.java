@@ -52,7 +52,7 @@ public class Bank_CustReport {
 			String query = "SELECT Account.account_id, Account.account_status, Account.account_type FROM Account, AccountCustomer "
 					+ "WHERE AccountCustomer.account_id = Account.account_id AND AccountCustomer.customer_id = '" + customer_id + "'";
 			
-			ResultSet rs = db.query(query);
+			ResultSet rs = db.querySelect(query);
 			
 			System.out.println("GENERATING CUSTOMER REPORT for Customer: " + customer_id);
 			

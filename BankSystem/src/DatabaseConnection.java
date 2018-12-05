@@ -27,7 +27,23 @@ public class DatabaseConnection {
 		Connection conn = DatabaseConnector();
 		System.out.println("Connection Established");
 	}
-	public ResultSet query(String input) {
+	public boolean queryUpdate(String input) {
+		Statement stmt = null;
+		boolean rs = false;
+		try {
+			stmt = DatabaseConnector().createStatement();
+			int x = stmt.executeUpdate(input);
+			if(x > 0) rs = true;
+			else rs = false;
+			
+		}
+		catch(Exception e) {
+			System.out.println("Error with query in backend");
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	public ResultSet querySelect(String input) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
