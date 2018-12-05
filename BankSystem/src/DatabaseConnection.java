@@ -33,6 +33,7 @@ public class DatabaseConnection {
 		try {
 			stmt = DatabaseConnector().createStatement();
 			rs = stmt.executeQuery(input);
+			rs.close();
 		}
 		catch(Exception e) {
 			System.out.println("Error with query in backend");

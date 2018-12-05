@@ -50,9 +50,11 @@ public class Bank_CustReport {
 			//generate a list of all accounts associated with the particular customer, and whether they are open or closed
 			
 			String query = "SELECT Account.account_id, Account.account_status, Account.account_type FROM Account, AccountCustomer "
-					+ "WHERE AccountCustomer.account_id = Account.account_id AND AccountCustomer.customer_id = '1234'";
+					+ "WHERE AccountCustomer.account_id = Account.account_id AND AccountCustomer.customer_id = '" + customer_id + "'";
 			
 			ResultSet rs = db.query(query);
+			
+			System.out.println("GENERATING CUSTOMER REPORT for Customer: " + customer_id);
 			
 		    while(rs.next()){	    
 		        //Retrieve by column name
@@ -61,7 +63,6 @@ public class Bank_CustReport {
 		        String account_type = rs.getString("account_type");
 
 		        //Display values
-		        System.out.println("GENERATING CUSTOMER REPORT: ");
 		        System.out.print("Account: " + account_id.trim());
 		        System.out.print(", Account Type: " + account_type.trim());
 		        System.out.println(", Account Status: " + account_status.trim());
