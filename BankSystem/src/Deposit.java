@@ -3,8 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Deposit {
+	public void addTransaction(String diff,String account_id, String transaction_info, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ", " + account_id + ", " + NULL + ", " + "Deposit");
+	}
 	public void deposit(String value, String account_id, DatabaseConnection db) {
 		try {
 			String query2 = "UPDATE Account SET balance = balance + "+value +" WHERE account_id = '"+account_id+"'";

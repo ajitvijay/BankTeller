@@ -107,6 +107,8 @@ public class Bank_Options {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//GENERATE GOVERNMENT REPORT
+				//pull all the rows of transaction table where its within the month and contains customer_id
+				generate_govt_report(db);
 			}
         });
 	    report_button.addActionListener(new ActionListener() {
@@ -121,6 +123,9 @@ public class Bank_Options {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//ADD INTEREST TO ALL ACCOUNTS
+				options_frame.dispose();
+				new Bank_Options();
+				add_monthly_interest(db);
 			}
         });
 	    acc_button.addActionListener(new ActionListener() {
@@ -212,6 +217,45 @@ public class Bank_Options {
 	    }
 		
 	}
+	
+	public void generate_govt_report(DatabaseConnection db) {
+		try {
+			Date today = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String todayStr = dateFormat.format(today);
+
+	        Calendar cal = Calendar.getInstance();
+	        cal.add(Calendar.MONTH, -1);
+	        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+	        String formattedmonth = format1.format(cal.getTime());
+	        
+	        System.out.println("Today's date: " + todayStr);
+	        System.out.println("Month ago's date: " + formattedmonth);
+	        
+	        String query = "SELECT DISTINCT(customer_id) AS dist_cid FROM Transaction WHERE transaction_date > TO_DATE('" + formattedmonth + "', 'yyyy-mm-dd') "
+	        				+ "AND transaction_date <= TO_DATE('" + todayStr + "', 'yyyy-mm-dd')";
+	  
+			ResultSet rs = db.querySelect(query);
+			
+			System.out.println("GENERATING GOVT EXCEEDED LIMITS WITHIN THE LAST MONTH: ");
+		
+			ArrayList c_ids = new ArrayList(); 
+		    while(rs.next()){	
+		        String customer_id = rs.getString("dist_cid");
+		        c_ids.add(customer_id); 
+		        
+		    }
+		    rs.close();
+		    
+//		    if(sum > 10000) {
+//	        	System.out.println("Exceeded 10k -> Customer Id: "); 
+//	        }
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+		
+	}
 
 	
 	public void delete_closed_account_customers(DatabaseConnection db) {
@@ -241,6 +285,21 @@ public class Bank_Options {
 			db.queryUpdate(query2);
 			
 			System.out.println("Transactions have been successfully deleted and ready for the new month of processing.");
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
+	
+	public void add_monthly_interest(DatabaseConnection db) {
+		try {
+			String query = "UPDATE Account SET balance = balance + (balance * ( interest_rate * 0.01 )) WHERE current_month_interest_added = 'no' AND account_status = 'open'"; 
+			db.queryUpdate(query);
+			
+			String query2 = "UPDATE Account SET current_month_interest_added = 'yes' WHERE current_month_interest_added = 'no' AND account_status = 'open'"; 
+			db.queryUpdate(query2);
+			
+			System.out.println("\n Monthly interset was successfully added to all open accounts.");
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();

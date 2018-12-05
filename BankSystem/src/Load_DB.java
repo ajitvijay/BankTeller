@@ -101,7 +101,7 @@ public class Load_DB{
 	}
 	
 	public static void fill_banktellers_table(String filename, DatabaseConnection db) {
-		String line="";selec
+		String line="";
 	      
 	      try (BufferedReader buff = new BufferedReader(new FileReader(filename))){
 	    	  while((line = buff.readLine()) != null) {
