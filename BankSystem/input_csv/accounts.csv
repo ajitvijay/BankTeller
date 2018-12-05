@@ -1,3 +1,14 @@
-csv_test,500,savings,123430,1.01,open,NULL,no,NULL, NULL
-csv_test,501,savings,2434,1.01,open,NULL,no,NULL, NULL
-csv_test,502,student-checking,234320,1.01,open,NULL,no,NULL, NULL
+san francisco,17431,student_checking, 0, 3,open, NULL,no, NULL, NULL
+los angeles,54321,student_checking, 0, 3,open, NULL,no, NULL, NULL
+goleta,12121,student_checking, 0, 3,open, NULL,no, NULL, NULL
+los angeles,41725,interest_checking, 0, 4,open, NULL,no, NULL, NULL
+santa barbara,76543,interest_checking, 0, 4,open, NULL,no, NULL, NULL
+goleta,93156,interest_checking, 0, 4,open, NULL,no, NULL, NULL
+santa barbara,43942,savings, 0, 5,open, NULL,no, NULL, NULL
+los angeles,29107,savings, 0, 5,open, NULL,no, NULL, NULL
+san francisco,19023,savings, 0, 5,open, NULL,no, NULL, NULL
+goleta,32156,savings, 0, 5,open, NULL,no, NULL, NULL
+goleta,53027,pocket, 0, 6,open, NULL,no, NULL,12121
+isla vista,43947,pocket, 0, 6,open, NULL,no, NULL,76543
+santa cruz,60413,pocket, 0, 6,open,NULL,no, NULL,43942
+santa barbara,67521,pocket,0,6,open,NULL,no,NULL,93156
