@@ -120,8 +120,5 @@ public class Load_DB{
 	    	  e.printStackTrace();
 	      }
 	}
-
-
-	
 	
 }

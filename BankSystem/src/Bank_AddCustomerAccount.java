@@ -5,7 +5,12 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Bank_AddCustomerAccount {
+	private DatabaseConnection db;
+	
 	public Bank_AddCustomerAccount() {
+		
+		this.db = new DatabaseConnection();
+		
 		JFrame frame = new JFrame("Add a new account and new customer ID");
 		frame.setSize(600,700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,10 +97,11 @@ public class Bank_AddCustomerAccount {
 				String balance = bal_input.getText();
 				String interest_rate = rate_input.getText();
 				String pocket_monthly_fee = fee_input.getText();
-				String pocked_linked_account_id = link_input.getText();
+				String pocket_linked_account_id = link_input.getText();
 				System.out.print("Creating new account for the customer id: " + customer_id + " account id: " + account_id);
 				frame.dispose();
 				new Bank_Options();
+				add_customer_account(customer_id, account_id, branch_name, account_type, balance, interest_rate, pocket_monthly_fee, pocket_linked_account_id, db);
 			}
         });
         
@@ -105,5 +111,30 @@ public class Bank_AddCustomerAccount {
         frame.getContentPane().add(BorderLayout.SOUTH, enterpanel);
 		frame.setVisible(true);
 		
+	}
+	
+	public void add_customer_account(String customer_id, String account_id, String branch_name, String account_type, String balance, 
+			String interest_rate, String pocket_monthly_fee, String pocket_linked_account_id, DatabaseConnection db) {
+		try {
+			String query = "";
+			if(account_type.equals("pocket")) {
+				query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "'," + balance
+	    		  		+ "," + interest_rate + ", 'open', NULL, 'no'," + pocket_monthly_fee + ",'" + pocket_linked_account_id + "')";
+			}
+			else {
+				query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+	    		  		+ "pocket_linked_account_id) VALUES (" + branch_name + "," + account_id + "," + account_type + "," 
+	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', NULL, NULL); ";
+			}
+			
+			System.out.println(query);
+			db.query(query);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
 	}
 }
