@@ -4,8 +4,28 @@ import java.sql.*;
 import java.awt.event.*;
 
 public class Transfer {
+	public String typeofAccount(String account_id, DatabaseConnection db) {
+		String query = "SELECT account_type FROM Account WHERE account_id = '" + account_id + "'";
+		ResultSet rs = db.querySelect(query);
+		String temp = "";
+		try {
+			while(rs.next()) {
+				String type = rs.getString("account_type");
+				return type;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			return temp;
+		}
+		return temp;
+	}
+	
 	public Transfer() {
 		JFrame frame = new JFrame("Transfer");
+		DatabaseConnection db = new DatabaseConnection();
+		
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(); // 
@@ -25,10 +45,8 @@ public class Transfer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(tf.getText() + " sends " + money.getText() + " dollars to " + pin_tf.getText());
-				tf.setText("");
-				money.setText("");
-				pin_tf.setText("");
+				
+				
 			}
 			
 		});
