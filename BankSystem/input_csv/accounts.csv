@@ -1,4 +1,3 @@
-"branch1","100","savings",10.00,1.01,"open",NULL,"no",NULL, NULL
-"branch2","101","savings",15.00,1.01,"open",NULL,"no",NULL, NULL
-"branch1","102","student-checking",20.00,1.01,"open",NULL,"no",NULL, NULL
-
+csv_test,500,savings,123430,1.01,open,NULL,no,NULL, NULL
+csv_test,501,savings,2434,1.01,open,NULL,no,NULL, NULL
+csv_test,502,student-checking,234320,1.01,open,NULL,no,NULL, NULL

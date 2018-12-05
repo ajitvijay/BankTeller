@@ -2,10 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.*;
 
 public class Bank_Check {
+	private DatabaseConnection db;
+	
 	public Bank_Check() {
+		this.db = new DatabaseConnection();
+		
 		JFrame check_frame = new JFrame("Bank Teller Options");
 		check_frame.setSize(500,100);
 		check_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,9 +32,10 @@ public class Bank_Check {
 			public void actionPerformed(ActionEvent e) {
 				String account_id = account_id_input.getText();
 				String specified_amount = specified_amount_input.getText();
-				System.out.print("Entered a check for account_id: " + account_id + " for the amount: " + specified_amount);
+				//System.out.print("Entered a check for account_id: " + account_id + " for the amount: " + specified_amount);
 				check_frame.dispose();
 				new Bank_Options();
+				write_check(account_id, specified_amount, db);
 			}
         });
         
@@ -40,4 +46,16 @@ public class Bank_Check {
 		check_frame.setVisible(true);
 		
 	}
+	
+	public void write_check(String account_id, String specified_amount, DatabaseConnection db) {
+		try {
+			String query = "UPDATE Account SET balance = balance - " + specified_amount + "WHERE account_id = '" + account_id + "';";
+			System.out.println(query);
+			db.query(query);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
+	
 }
