@@ -5,13 +5,33 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Purchase {
+	public void purchase(String price, String customer_id, DatabaseConnection db) {
+		try {
+			String query = "SELECT account_id FROM AccountCustomer WHERE customer_id = '"+customer_id+"' AND account_type = 'pocket'";
+			ResultSet rs = db.querySelect(query);
+			if(rs.isBeforeFirst()) {
+				String account_id = rs.getString("account_id");
+				String query2 = "UPDATE Account SET balance = balance - "+price +" WHERE account_id = '"+account_id+"'";
+				System.out.println(query2);
+				db.queryUpdate(query2);
+			}
+			else {
+				System.out.println("Not a pocket account, can't complete transaction");
+			}
+			
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
 	public Purchase() {
 		JFrame frame = new JFrame("Purchase");
+		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(400,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(); // 
 		JLabel label = new JLabel("Enter Price of Purchase");
-		JLabel send 	= new JLabel("Enter Account Number");
+		JLabel send = new JLabel("Enter Account Number");
 		JTextField tf = new JTextField(10); // accepts up to 10 characters
 		JTextField pin_tf = new JTextField(10);
 		
@@ -21,9 +41,14 @@ public class Purchase {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println(tf.getText() + " dollars is spent on a purchase by " + pin_tf.getText());
-					tf.setText("");
-					pin_tf.setText("");
+					
+					String deposit_value = tf.getText();
+				    String account_id = pin_tf.getText();
+					frame.dispose();
+					new ATMFunctions();
+					purchase(deposit_value,account_id,db);
+					System.out.println(tf.getText() + " dollars is the amount purchased by account owner " + pin_tf.getText());
+
 				}
 	        	
 	        	

@@ -8,8 +8,8 @@ public class Deposit {
 	public void deposit(String value, String account_id, DatabaseConnection db) {
 		try {
 			String query2 = "UPDATE Account SET balance = balance + "+value +" WHERE account_id = '"+account_id+"'";
-			String query = "UPDATE Account SET balance = balance - 3000 WHERE account_id = '265'";
-			System.out.println(query);
+			//String query = "UPDATE Account SET balance = balance - 3000 WHERE account_id = '265'";
+			//System.out.println(query);
 			System.out.println(query2);
 			db.queryUpdate(query2);
 		}
