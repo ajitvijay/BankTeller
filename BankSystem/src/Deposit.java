@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deposit {
-	public void addTransaction(String diff,String account_id, DatabaseConnection db) {
+	public void addTransaction(String diff,String account_id,String customerid, DatabaseConnection db) {
 		Date today = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String todayStr = dateFormat.format(today);
         //";
         String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
-        + diff + ",'" + account_id + "', " + null + ", " + "'Deposit')";
+        + diff + ",'" + account_id + "', '" + customerid + "', " + "'Deposit')";
         db.queryUpdate(query);
         System.out.println("Transaction successfully added");
 	}
@@ -32,6 +32,7 @@ public class Deposit {
 	}
 	public Deposit() {
 		JFrame frame = new JFrame("Deposit");
+		ATM atm = new ATM();
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		DatabaseConnection db = new DatabaseConnection();
@@ -53,7 +54,8 @@ public class Deposit {
 				new ATMFunctions();
 				deposit(deposit_value,account_id,db);
 				System.out.println(tf.getText() + " dollars is the amount deposited");
-				addTransaction(deposit_value, account_id, db);
+				addTransaction(deposit_value, account_id,atm.customerid,db);
+				System.out.println("Transaction added to database");
 				
 			}
         	

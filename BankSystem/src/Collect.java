@@ -14,12 +14,14 @@ public class Collect {
 				String type = rs.getString("account_type");
 				return type;
 			}
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			
 			e.printStackTrace();
 			return temp;
 		}
+		
 		return temp;
 	}
 	public void collect(String value, String account_id1, String account_id2, DatabaseConnection db) {

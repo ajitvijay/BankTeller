@@ -12,7 +12,7 @@ public class Load_DB{
 		
 		//fill_accounts_table("input_csv/accounts.csv", db);
 		//fill_customers_table("input_csv/customers2.csv", db);
-		//fill_accountcustomers_table("input_csv/accountcustomers.csv",db);
+		fill_accountcustomers_table("input_csv/accountcustomers.csv",db);
 		//fill_banktellers_table("input_csv/banktellers.csv",db);
 	}
 	
@@ -92,7 +92,9 @@ public class Load_DB{
 	    		  String query = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES (" + account_id + "," + customer_id + "," + account_type + "," + is_primary_owner + ") ";
 	    		  //String query = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES ('test','test','test','test')";
 	    		  
-	    		  //db.query(query);
+	    		  db.queryUpdate(query);
+	    		  System.out.println(query);
+	    		  
 	    	  }
 	      }
 	      catch (IOException e) {

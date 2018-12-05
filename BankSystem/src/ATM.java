@@ -5,7 +5,8 @@ import java.sql.*;
 import javax.swing.*;
 
 public class ATM {
-
+	
+	public String customerid = "";
 	
 	public ATM() {
 		// TODO Auto-generated method stub
@@ -35,6 +36,8 @@ public class ATM {
 					atm.dispose();
 					String id = JOptionPane.showInputDialog(login_frame,"Enter Account Number");
 					String customer_id = JOptionPane.showInputDialog(login_frame, "Enter Customer ID");
+					customerid = customer_id;
+					System.out.println(customerid);
 					String pin = JOptionPane.showInputDialog(login_frame, "Enter Pin Number");
 					// validate login and move forward accordingly
 					boolean temp = validate(id,customer_id,pin,db);
@@ -97,6 +100,18 @@ public class ATM {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
+		}
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs1.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		if((check) && (check2)) return true;
 		else return false;

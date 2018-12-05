@@ -44,7 +44,20 @@ public class DatabaseConnection {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally{
+		      //finally block used to close resources
+		      try{
+		         if(stmt!=null)
+		            DatabaseConnector().close();
+		      }catch(SQLException se){
+		      }// do nothing
+		      try{
+		         if(DatabaseConnector()!=null)
+		        	 DatabaseConnector().close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		   }//end try
 		
 		return rs;
 	}
@@ -59,6 +72,20 @@ public class DatabaseConnection {
 			System.out.println("Error with query in backend");
 			e.printStackTrace();
 		}
+		finally{
+		      //finally block used to close resources
+		      try{
+		         if(stmt!=null)
+		            DatabaseConnector().close();
+		      }catch(SQLException se){
+		      }// do nothing
+		      try{
+		         if(DatabaseConnector()!=null)
+		        	 DatabaseConnector().close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		   }//end try
 		return rs;
 	}
 }

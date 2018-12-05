@@ -3,8 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TopUp {
+	public void addTransaction(String diff,String account_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + null + ", " + "'TopUP')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public String typeofAccount(String account_id, DatabaseConnection db) {
 		String query = "SELECT account_type FROM Account WHERE account_id = '" + account_id + "'";
 		ResultSet rs = db.querySelect(query);
@@ -67,7 +80,7 @@ public class TopUp {
 					frame.dispose();
 					new ATMFunctions();
 					System.out.println(tf.getText() + " sent " + money.getText() + " dollars to account num " + pin_tf.getText());
-
+					addTransaction(money.getText(),tf.getText(),db);
 				}
 				else {
 					System.out.println("Can't transfer money");

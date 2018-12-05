@@ -19,6 +19,7 @@ public class Purchase {
 			else {
 				System.out.println("Can't make transaction");
 			}
+			rs.close();
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();

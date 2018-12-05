@@ -13,6 +13,7 @@ public class Transfer {
 				String type = rs.getString("account_type");
 				return type;
 			}
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			
