@@ -5,8 +5,40 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class TopUp {
+	public String typeofAccount(String account_id, DatabaseConnection db) {
+		String query = "SELECT account_type FROM Account WHERE account_id = '" + account_id + "'";
+		ResultSet rs = db.querySelect(query);
+		String temp = "";
+		try {
+			while(rs.next()) {
+				String type = rs.getString("account_type");
+				return type;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			return temp;
+		}
+		return temp;
+	}
+	public void topUp(String value, String account_id1, String account_id2, DatabaseConnection db) {
+		try {
+			String query2 = "UPDATE Account SET balance = balance - "+value +" WHERE account_id = '"+account_id1.trim()+"'";
+			String query = "UPDATE Account SET balance = balance + "+value +" WHERE account_id = '"+account_id2.trim()+"'";
+			System.out.println(query2);
+			System.out.println(query);
+			db.queryUpdate(query2);
+			db.queryUpdate(query);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
 	public TopUp() {
 		JFrame frame = new JFrame("Top Up");
+		DatabaseConnection db = new DatabaseConnection();
+		
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(); // 
@@ -25,11 +57,22 @@ public class TopUp {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println(tf.getText() + " sends " + money.getText() + " dollars to " + pin_tf.getText());
-				tf.setText("");
-				money.setText("");
-				pin_tf.setText("");
+				String acc1 = typeofAccount(tf.getText(), db);
+				String acc2 = typeofAccount(pin_tf.getText(), db);
+				System.out.println(acc1);
+				System.out.println(acc2);
+				
+				if((acc1.trim().equals("interest_checking") || (acc1.trim().equals("student_checking")) || acc1.trim().equals("savings")) && acc2.trim().equals("pocket")) {
+					topUp(money.getText(),tf.getText(),pin_tf.getText(), db);
+					frame.dispose();
+					new ATMFunctions();
+					System.out.println(tf.getText() + " sent " + money.getText() + " dollars to account num " + pin_tf.getText());
+
+				}
+				else {
+					System.out.println("Can't transfer money");
+				}
+				
 			}
 			
 		});

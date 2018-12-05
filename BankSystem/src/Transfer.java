@@ -21,7 +21,19 @@ public class Transfer {
 		}
 		return temp;
 	}
-	
+	public void transfer(String value, String account_id1, String account_id2, DatabaseConnection db) {
+		try {
+			String query2 = "UPDATE Account SET balance = balance - "+value +" WHERE account_id = '"+account_id1.trim()+"'";
+			String query = "UPDATE Account SET balance = balance + "+value +" WHERE account_id = '"+account_id2.trim()+"'";
+			System.out.println(query2);
+			System.out.println(query);
+			db.queryUpdate(query2);
+			db.queryUpdate(query);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
 	public Transfer() {
 		JFrame frame = new JFrame("Transfer");
 		DatabaseConnection db = new DatabaseConnection();
@@ -44,11 +56,17 @@ public class Transfer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				if(Integer.parseInt(money.getText()) > 2000) {
+					System.out.println("Too much money being moved");
+				}
+				else {
+					transfer(money.getText(),tf.getText(), pin_tf.getText(), db);
+					frame.dispose();
+					new ATMFunctions();
+					System.out.println(tf.getText() + " transfers " + money.getText() + " dollars to " + pin_tf.getText());
+				}
 				
 			}
-			
 		});
 		
 		
