@@ -5,8 +5,19 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class WriteCheck {
+	public void write_check(String value, String account_id, DatabaseConnection db) {
+		try {
+			String query2 = "UPDATE Account SET balance = balance - "+value +" WHERE account_id = '"+account_id+"'";
+			System.out.println(query2);
+			db.queryUpdate(query2);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
 	public WriteCheck() {
 		JFrame frame = new JFrame("Write Check");
+		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(); // 
@@ -26,10 +37,15 @@ public class WriteCheck {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(tf.getText() + " writes check " + money.getText() + " for " + pin_tf.getText() + " dollars");
-				tf.setText("");
-				money.setText("");
-				pin_tf.setText("");
+				String checknum = pin_tf.getText();
+				
+				String check_value = money.getText();
+			    String account_id = tf.getText();
+				frame.dispose();
+				new ATMFunctions();
+				write_check(check_value,account_id,db);
+				System.out.println(tf.getText() + " writes check " + pin_tf.getText() + " for " + money.getText() + " dollars");
+			
 			}
 			
 		});

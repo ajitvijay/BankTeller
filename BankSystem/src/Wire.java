@@ -4,8 +4,25 @@ import java.sql.*;
 import java.awt.event.*;
 
 public class Wire {
+	public void wire(String value, String account_id1, String account_id2, DatabaseConnection db) {
+		try {
+			String temp = value;
+			value = "" + (Integer.parseInt(temp) * 1.02);
+			String query2 = "UPDATE Account SET balance = balance - "+value +" WHERE account_id = '"+account_id1+"'";
+			String query = "UPDATE Account SET balance = balance + "+temp +" WHERE account_id = '"+account_id2+"'";
+			System.out.println(query2);
+			System.out.println(query);
+
+			db.queryUpdate(query2);
+			db.queryUpdate(query);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
 	public Wire() {
 		JFrame frame = new JFrame("Wire");
+		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(); // 
@@ -25,10 +42,13 @@ public class Wire {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(tf.getText() + " sends " + money.getText() + " dollars to " + pin_tf.getText());
-				tf.setText("");
-				money.setText("");
-				pin_tf.setText("");
+				String send = tf.getText();
+				String recv = pin_tf.getText();
+			    String moolah = money.getText();
+				frame.dispose();
+				new ATMFunctions();
+				wire(moolah,send,recv,db);
+				System.out.println(tf.getText() + " wires " + pin_tf.getText() + " " + money.getText() + " dollars");
 			}
 			
 		});

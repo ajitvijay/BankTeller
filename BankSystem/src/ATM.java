@@ -8,10 +8,11 @@ public class ATM {
 
 	public ATM() {
 		// TODO Auto-generated method stub
-		new ATMFunctions();
+		//new ATMFunctions();
 		JFrame atm = new JFrame("ATM Interface");
 		atm.setSize(500,100);
 		atm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		DatabaseConnection db = new DatabaseConnection();
 		
 		JPanel panel = new JPanel(); // 
 //        JLabel label = new JLabel("Enter Account Number");
@@ -35,7 +36,17 @@ public class ATM {
 					String customer_id = JOptionPane.showInputDialog(login_frame, "Enter Customer ID");
 					String pin = JOptionPane.showInputDialog(login_frame, "Enter Pin Number");
 					// validate login and move forward accordingly
-					
+					boolean temp = validate(id,customer_id,pin,db);
+					if((temp)) {
+						atm.dispose();
+						new ATMFunctions();
+						System.out.println("Login Successful");
+					}
+					else {
+						atm.dispose();
+						new ATM();
+						System.out.println("Login Failed");
+					}
 					System.out.println(id);
 					System.out.println(customer_id);
 					System.out.println(pin);
@@ -61,5 +72,32 @@ public class ATM {
 		atm.getContentPane().add(BorderLayout.NORTH, panel);
 		atm.getContentPane().add(BorderLayout.SOUTH, logincheck);
 		atm.setVisible(true);
+	}
+	public boolean validate(String account_id, String customer_id, String pin, DatabaseConnection db) {
+		String query = "SELECT account_id, customer_id FROM AccountCustomer WHERE account_id = '" + 
+	account_id + "'" + "AND customer_id = '" + customer_id + "'";
+		String query2 = "SELECT PIN from Customer WHERE pin = '" + pin + "'" +"AND tax_id = '" + customer_id + "'";
+		ResultSet rs = db.querySelect(query);
+		ResultSet rs1 = db.querySelect(query2);
+		boolean check = false;
+		boolean check2 = false;
+		try {
+			if (rs.isBeforeFirst()) check = true;
+			else check = false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		try {
+			if(rs1.isBeforeFirst()) check2 = true;
+			else check2 = false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		if((check) && (check2)) return true;
+		else return false;
 	}
 }
