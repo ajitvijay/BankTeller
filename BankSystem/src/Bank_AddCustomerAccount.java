@@ -101,7 +101,7 @@ public class Bank_AddCustomerAccount {
 				System.out.print("Creating new account for the customer id: " + customer_id + " account id: " + account_id);
 				frame.dispose();
 				new Bank_Options();
-				add_customer_account(customer_id, account_id, branch_name, account_type, balance, interest_rate, pocket_monthly_fee, pocket_linked_account_id, db);
+				//add_customer_account(customer_id, account_id, branch_name, account_type, balance, interest_rate, pocket_monthly_fee, pocket_linked_account_id, db);
 			}
         });
         
@@ -120,8 +120,8 @@ public class Bank_AddCustomerAccount {
 			if(account_type.equals("pocket")) {
 				query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
 	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
-	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "'," + balance
-	    		  		+ "," + interest_rate + ", 'open', NULL, 'no'," + pocket_monthly_fee + ",'" + pocket_linked_account_id + "')";
+	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "',"
+	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', '" + pocket_linked_account_id + "')";
 			}
 			else {
 				query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
@@ -131,7 +131,7 @@ public class Bank_AddCustomerAccount {
 			}
 			
 			System.out.println(query);
-			db.query(query);
+			db.queryUpdate(query);
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();
