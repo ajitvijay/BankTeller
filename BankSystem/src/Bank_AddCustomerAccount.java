@@ -90,7 +90,10 @@ public class Bank_AddCustomerAccount {
         enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String customer_name = name_input.getText();
+				String address = add_input.getText();
 				String customer_id = cust_input.getText();
+				String pin = pin_input.getText();
 				String account_id = acc_input.getText();
 				String branch_name = branch_input.getText();
 				String account_type = type_input.getText();
@@ -101,7 +104,8 @@ public class Bank_AddCustomerAccount {
 				System.out.print("Creating new account for the customer id: " + customer_id + " account id: " + account_id);
 				frame.dispose();
 				new Bank_Options();
-				//add_customer_account(customer_id, account_id, branch_name, account_type, balance, interest_rate, pocket_monthly_fee, pocket_linked_account_id, db);
+				add_customer_account(customer_name, address, customer_id, pin, account_id, branch_name, account_type, 
+						balance, interest_rate, pocket_monthly_fee, pocket_linked_account_id, db);
 			}
         });
         
@@ -113,25 +117,57 @@ public class Bank_AddCustomerAccount {
 		
 	}
 	
-	public void add_customer_account(String customer_id, String account_id, String branch_name, String account_type, String balance, 
+	public void add_customer_account(String customer_name, String address, String customer_id, String pin, String account_id, String branch_name, String account_type, String balance, 
 			String interest_rate, String pocket_monthly_fee, String pocket_linked_account_id, DatabaseConnection db) {
 		try {
-			String query = "";
-			if(account_type.equals("pocket")) {
-				query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+			
+			if(account_type.equals("pocket")) { //CREATING A POCKET ACCOUNT
+				String query1 = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
 	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
 	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "',"
-	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', '" + pocket_linked_account_id + "')";
+	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', " + pocket_monthly_fee + ",'" + pocket_linked_account_id + "')";
+				
+				System.out.println(query1);
+				db.queryUpdate(query1);
+				
+				String query2 = "INSERT INTO Customer (owner_name, tax_id, address, pin) VALUES ('" 
+						+ customer_name + "','" + customer_id + "','" + address + "','" + pin + "')";
+				
+				System.out.println(query2);
+				db.queryUpdate(query2);
+				
+				String query3 = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES ('" + account_id + "','" 
+						+ customer_id + "','" + account_type + "', 'yes' ) ";
+				
+				System.out.println(query3);
+				db.queryUpdate(query3);
+				
+				
 			}
 			else {
-				query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+				String query1 = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
 	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
 	    		  		+ "pocket_linked_account_id) VALUES (" + branch_name + "," + account_id + "," + account_type + "," 
 	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', NULL, NULL); ";
+				
+				System.out.println(query1);
+				db.queryUpdate(query1);
+				
+				String query2 = "INSERT INTO Customer (owner_name, tax_id, address, pin) VALUES ('" 
+						+ customer_name + "','" + customer_id + "','" + address + "','" + pin + "')";
+				
+				System.out.println(query2);
+				db.queryUpdate(query2);
+				
+				String query3 = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES ('" + account_id + "','" 
+						+ customer_id + "','" + account_type + "', 'yes' ) ";
+				
+				System.out.println(query3);
+				db.queryUpdate(query3);
+				
 			}
 			
-			System.out.println(query);
-			db.queryUpdate(query);
+			
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();

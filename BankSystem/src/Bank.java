@@ -12,15 +12,7 @@ public class Bank {
 		bank.setSize(500,100);
 		bank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel(); // 
-//        JLabel label = new JLabel("Enter Account Number");
-//        JLabel pin 	= new JLabel("Enter Pin");
-//        JTextField tf = new JTextField(10); // accepts up to 10 characters
-//        JTextField pin_tf = new JTextField(10);
-//        panel.add(BorderLayout.NORTH,label); // Components Added using Flow Layout
-//        panel.add(BorderLayout.AFTER_LINE_ENDS,tf);
-//        panel.add(BorderLayout.AFTER_LAST_LINE, pin);
-//        panel.add(BorderLayout.AFTER_LINE_ENDS,pin_tf);
+		JPanel panel = new JPanel();
         
         JPanel logincheck = new JPanel();
         JButton login = new JButton("Login");
