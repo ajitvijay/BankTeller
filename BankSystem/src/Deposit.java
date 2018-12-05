@@ -5,6 +5,17 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Deposit {
+	public void deposit(String value, String account_id, DatabaseConnection db) {
+		try {
+			String query = "UPDATE Account SET balance = balance + " + value + " WHERE account_id = '" + account_id + "'";
+			//String query = "UPDATE Account SET balance = balance - 3000 WHERE account_id = '265'";
+			System.out.println(query);
+			db.query(query);
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
 	public Deposit() {
 		JFrame frame = new JFrame("Deposit");
 		frame.setSize(400,400);
@@ -22,21 +33,13 @@ public class Deposit {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-				try {
-			       int deposit_value = Integer.parseInt(tf.getText());
-			       int account_id = Integer.parseInt(pin_tf.getText());
-			       String query = "UPDATE Account SET balance = balance + " + deposit_value + 
-							" WHERE account_id = '" + account_id + "'";
-			       db.query(query);
-			       
-			    } catch (NumberFormatException nfe) {
-			        tf.setText("");
-			    }
-				
+				String deposit_value = tf.getText();
+			    String account_id = pin_tf.getText();
+				frame.dispose();
+				new ATMFunctions();
+				deposit(deposit_value,account_id,db);
 				System.out.println(tf.getText() + " dollars is the amount deposited");
-				tf.setText("");
-				pin_tf.setText("");
+				
 			}
         	
         	
