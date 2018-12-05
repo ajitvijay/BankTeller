@@ -19,7 +19,9 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new Deposit();
+				
 			}
 			
 		});
@@ -30,6 +32,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new TopUp();
 			}
 			
@@ -41,6 +44,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new Withdraw();
 			}
 			
@@ -52,6 +56,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new Purchase();
 			}
 			
@@ -63,6 +68,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new Transfer();
 			}
 			
@@ -74,6 +80,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new Collect();
 			}
 			
@@ -85,6 +92,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new PayFriend();
 			}
 			
@@ -96,6 +104,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new Wire();
 			}
 			
@@ -107,6 +116,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new WriteCheck();
 			}
 			
@@ -118,6 +128,7 @@ public class ATMFunctions {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				atm.dispose();
 				new AccrueInterest();
 			}
 			

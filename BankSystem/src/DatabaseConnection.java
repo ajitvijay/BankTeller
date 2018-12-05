@@ -39,6 +39,13 @@ public class DatabaseConnection {
 			System.out.println("Error with query in backend");
 			e.printStackTrace();
 		}
+		try {
+			DatabaseConnector().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return rs;
 	}
 	public ResultSet querySelect(String input) {
@@ -47,7 +54,7 @@ public class DatabaseConnection {
 		try {
 			stmt = DatabaseConnector().createStatement();
 			rs = stmt.executeQuery(input);
-			rs.close();
+			
 		}
 		catch(Exception e) {
 			System.out.println("Error with query in backend");
