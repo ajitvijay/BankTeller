@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Bank_AddAccount {
+	private DatabaseConnection db;
+	
 	public Bank_AddAccount() {
+		this.db = new DatabaseConnection();
+		
 		JFrame frame = new JFrame("Add a new account, using existing customer ID");
 		frame.setSize(550,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,10 +78,11 @@ public class Bank_AddAccount {
 				String balance = bal_input.getText();
 				String interest_rate = rate_input.getText();
 				String pocket_monthly_fee = fee_input.getText();
-				String pocked_linked_account_id = link_input.getText();
-				System.out.print("Creating new account for the customer id: " + customer_id + " account id: " + account_id);
+				String pocket_linked_account_id = link_input.getText();
+				System.out.print("Creating new account for the EXISTING customer id: " + customer_id + " account id: " + account_id);
 				frame.dispose();
 				new Bank_Options();
+				add_account(customer_id, account_id, branch_name, account_type, balance, interest_rate, pocket_monthly_fee, pocket_linked_account_id, db);
 			}
         });
         
@@ -88,4 +93,50 @@ public class Bank_AddAccount {
 		frame.setVisible(true);
 		
 	}
+	
+	public void add_account(String customer_id, String account_id, String branch_name, String account_type, String balance, String interest_rate, String pocket_monthly_fee, String pocket_linked_account_id, DatabaseConnection db) {
+		try {
+			
+			if(account_type.equals("pocket")) { //CREATING A POCKET ACCOUNT
+				String query1 = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "',"
+	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', " + pocket_monthly_fee + ",'" + pocket_linked_account_id + "')";
+				
+				System.out.println(query1);
+				db.queryUpdate(query1);
+				
+				String query3 = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES ('" + account_id + "','" 
+						+ customer_id + "','" + account_type + "', 'yes' ) ";
+				
+				System.out.println(query3);
+				db.queryUpdate(query3);
+				
+				
+			}
+			else {
+				String query1 = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+	    		  		+ "pocket_linked_account_id) VALUES (" + branch_name + "," + account_id + "," + account_type + "," 
+	    		  		+ balance + "," + interest_rate + ", 'open', NULL, 'no', NULL, NULL); ";
+				
+				System.out.println(query1);
+				db.queryUpdate(query1);
+				
+				String query3 = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES ('" + account_id + "','" 
+						+ customer_id + "','" + account_type + "', 'yes' ) ";
+				
+				System.out.println(query3);
+				db.queryUpdate(query3);
+				
+			}
+			
+			
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
+	
+	
 }
