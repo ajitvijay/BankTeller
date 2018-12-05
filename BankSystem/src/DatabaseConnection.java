@@ -27,14 +27,12 @@ public class DatabaseConnection {
 		Connection conn = DatabaseConnector();
 		System.out.println("Connection Established");
 	}
-	public boolean queryUpdate(String input) {
+	public int queryUpdate(String input) {
 		Statement stmt = null;
-		boolean rs = false;
+		int rs = 0;
 		try {
 			stmt = DatabaseConnector().createStatement();
-			int x = stmt.executeUpdate(input);
-			if(x > 0) rs = true;
-			else rs = false;
+			rs = stmt.executeUpdate(input);
 			
 		}
 		catch(Exception e) {

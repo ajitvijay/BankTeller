@@ -49,8 +49,8 @@ public class Bank_Check {
 	
 	public void write_check(String account_id, String specified_amount, DatabaseConnection db) {
 		try {
-			//String query = "UPDATE Account SET balance = balance - " + specified_amount + " WHERE account_id = '" + account_id + "'";
-			String query = "UPDATE Account SET balance = balance - 3000 WHERE account_id = '265'";
+			String query = "UPDATE Account SET balance = balance - " + specified_amount + " WHERE account_id = '" + account_id + "'";
+			//String query = "UPDATE Account SET balance = balance - 3000 WHERE account_id = '265'";
 			System.out.println(query);
 			db.queryUpdate(query);
 		}
