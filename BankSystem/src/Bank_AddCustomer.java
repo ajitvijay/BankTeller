@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Bank_AddCustomer {
+	private DatabaseConnection db;
 	public Bank_AddCustomer() {
+		this.db = new DatabaseConnection();
+		
 		JFrame frame = new JFrame("Add a new account, using existing customer ID");
 		frame.setSize(550,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,6 +21,9 @@ public class Bank_AddCustomer {
 		
 		JLabel acc = new JLabel("Enter EXISTING Account ID: ");
 		JTextField acc_input = new JTextField(10);
+		
+		JLabel type = new JLabel("Enter EXISTING Account TYPE [savings, student_checking, interest_checking, pocket]: ");
+		JTextField type_input = new JTextField(10);
 		
 		JLabel name = new JLabel("Enter NEW Customer Name: ");
 		JTextField name_input = new JTextField(10);
@@ -35,6 +41,9 @@ public class Bank_AddCustomer {
 		panel.add(BorderLayout.AFTER_LAST_LINE, acc);
 		panel.add(BorderLayout.AFTER_LINE_ENDS, acc_input);
 		
+		panel.add(BorderLayout.AFTER_LAST_LINE, type);
+		panel.add(BorderLayout.AFTER_LINE_ENDS, type_input);
+		
 		panel.add(BorderLayout.AFTER_LAST_LINE, name);
 		panel.add(BorderLayout.AFTER_LINE_ENDS, name_input);
 		
@@ -51,12 +60,14 @@ public class Bank_AddCustomer {
 			public void actionPerformed(ActionEvent e) {
 				String tax_id = cust_input.getText();
 				String account_id = acc_input.getText();
+				String account_type = type_input.getText();
 				String owner_name = name_input.getText();
 				String address = add_input.getText();
 				String pin = pin_input.getText();
 				System.out.print("Creating new account for the customer id: " + tax_id + " account id: " + account_id);
 				frame.dispose();
 				new Bank_Options();
+				add_customer(tax_id, account_id, account_type, owner_name, address, pin, db);
 			}
         });
         
@@ -67,4 +78,27 @@ public class Bank_AddCustomer {
 		frame.setVisible(true);
 		
 	}
+	
+	public void add_customer(String tax_id, String account_id, String account_type, String owner_name, String address, String pin, DatabaseConnection db) {
+		try {
+			
+			String query2 = "INSERT INTO Customer (owner_name, tax_id, address, pin) VALUES ('" 
+					+ owner_name + "','" + tax_id + "','" + address + "','" + pin + "')";
+			
+			System.out.println(query2);
+			db.queryUpdate(query2);
+			
+			String query3 = "INSERT INTO AccountCustomer (account_id, customer_id, account_type, is_primary_owner) VALUES ('" + account_id + "','" 
+					+ tax_id + "','" + account_type + "', 'no' ) ";
+			
+			System.out.println(query3);
+			db.queryUpdate(query3);
+			
+			
+		}
+		catch (Exception e) {
+	    	  e.printStackTrace();
+	    }
+	}
+	
 }
