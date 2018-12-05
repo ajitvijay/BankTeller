@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class ATM {
 
+	
 	public ATM() {
 		// TODO Auto-generated method stub
 		//new ATMFunctions();
