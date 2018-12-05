@@ -9,6 +9,7 @@ public class Deposit {
 		JFrame frame = new JFrame("Deposit");
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		DatabaseConnection db = new DatabaseConnection();
 		
 		JPanel panel = new JPanel();
 		JLabel send = new JLabel("Account Number money is going to");
@@ -21,8 +22,21 @@ public class Deposit {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				try {
+			       int deposit_value = Integer.parseInt(tf.getText());
+			       int account_id = Integer.parseInt(pin_tf.getText());
+			       String query = "UPDATE Account SET balance = balance + " + deposit_value + 
+							" WHERE account_id = '" + account_id + "'";
+			       db.query(query);
+			       
+			    } catch (NumberFormatException nfe) {
+			        tf.setText("");
+			    }
+				
 				System.out.println(tf.getText() + " dollars is the amount deposited");
 				tf.setText("");
+				pin_tf.setText("");
 			}
         	
         	
