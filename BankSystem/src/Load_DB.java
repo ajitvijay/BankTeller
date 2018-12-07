@@ -10,9 +10,9 @@ public class Load_DB{
 	public static void main (String [] args) {
 		DatabaseConnection db = new DatabaseConnection(); 
 		
-		//fill_accounts_table("input_csv/accounts.csv", db);
+		fill_accounts_table("BankSystem/input_csv/accounts.csv", db);
 		//fill_customers_table("input_csv/customers2.csv", db);
-		fill_accountcustomers_table("input_csv/accountcustomers.csv",db);
+		//fill_accountcustomers_table("input_csv/accountcustomers.csv",db);
 		//fill_banktellers_table("input_csv/banktellers.csv",db);
 	}
 	
@@ -34,17 +34,29 @@ public class Load_DB{
 	    		  String pocket_monthly_fee = cols[8];
 	    		  String pocket_linked_account_id = cols[9];
 	    		  
-	    		  String query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
-	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
-	    		  		+ "pocket_linked_account_id) VALUES (" + branch_name + "," + account_id + "," + account_type + "," 
-	    		  		+ balance + "," + interest_rate + "," + account_status + "," + closed_date + "," + 
-	    		  		current_month_interest_added + "," + pocket_monthly_fee + "," + pocket_linked_account_id + "); ";
+	    		  String query = "";
+	    		  
+	    		  if(account_type.equals("pocket")){
+	    			  query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+	  	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+	  	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "'," 
+	  	    		  		+ balance + "," + interest_rate + ",'" + account_status + "', NULL ,'" + 
+	  	    		  		current_month_interest_added + "'," + pocket_monthly_fee + ",'" + pocket_linked_account_id + "') ";
+	    		  }
+	    		  else{
+	    			  query = "INSERT INTO Account (branch_name, account_id, account_type, balance,"
+	  	    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
+	  	    		  		+ "pocket_linked_account_id) VALUES ('" + branch_name + "','" + account_id + "','" + account_type + "'," 
+	  	    		  		+ balance + "," + interest_rate + ",'" + account_status + "',NULL,'" + 
+	  	    		  		current_month_interest_added + "',NULL,NULL)";
+	    		  }
 	    		  
 //	    		  String query = "INSERT INTO Account (branch_name, account_id, account_type, balance, "
 //		    		  		+ "interest_rate, account_status, closed_date, current_month_interest_added, pocket_monthly_fee,"
 //		    		  		+ "pocket_linked_account_id) VALUES ('test_branch','888','student_checking', 423523.50, 1.02, 'open', NULL, 'no', 0.0, NULL)";
 	    		  
-	    		  //db.query(query);
+	    		  System.out.println(query);
+	    		  db.queryUpdate(query);
 	    	  }
 	      }
 	      catch (IOException e) {

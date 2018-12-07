@@ -10,7 +10,7 @@ public class DatabaseConnection {
 		      String DB_URL = "jdbc:oracle:thin:@cloud-34-133.eci.ucsb.edu:1521:XE";
 
 		      Class.forName(JDBC_DRIVER);
-		      System.out.println("Connecting to a selected database...");
+		      //System.out.println("Connecting to a selected database...");
 		      Connection conn = DriverManager.getConnection(DB_URL, "ajitvijayakumar", "12Vijay99!");
 		      //comment
 		      return conn;

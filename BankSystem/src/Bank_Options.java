@@ -232,24 +232,21 @@ public class Bank_Options {
 	        System.out.println("Today's date: " + todayStr);
 	        System.out.println("Month ago's date: " + formattedmonth);
 	        
-	        String query = "SELECT DISTINCT(customer_id) AS dist_cid FROM Transaction WHERE transaction_date > TO_DATE('" + formattedmonth + "', 'yyyy-mm-dd') "
-	        				+ "AND transaction_date <= TO_DATE('" + todayStr + "', 'yyyy-mm-dd')";
-	  
+	        String query = "SELECT customer_id FROM Transaction "
+	        		+ "WHERE transaction_date > TO_DATE('" + formattedmonth + "', 'yyyy-mm-dd') AND " 
+	        		+  "transaction_date <= TO_DATE('" + todayStr + "', 'yyyy-mm-dd') "
+	        		+ "GROUP BY customer_id "
+	        		+ "HAVING SUM(difference) > 10000";
+	      
 			ResultSet rs = db.querySelect(query);
 			
-			System.out.println("GENERATING GOVT EXCEEDED LIMITS WITHIN THE LAST MONTH: ");
+			System.out.println("Generating Government Report for CustomerID's over the monthly transaction limit of $10k: ");
 		
-			ArrayList c_ids = new ArrayList(); 
 		    while(rs.next()){	
-		        String customer_id = rs.getString("dist_cid");
-		        c_ids.add(customer_id); 
-		        
+		        String customer_id = rs.getString("customer_id");
+		        System.out.println("Customer ID: " + customer_id);
 		    }
 		    rs.close();
-		    
-//		    if(sum > 10000) {
-//	        	System.out.println("Exceeded 10k -> Customer Id: "); 
-//	        }
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();
@@ -260,9 +257,9 @@ public class Bank_Options {
 	
 	public void delete_closed_account_customers(DatabaseConnection db) {
 		try {
-			String query = "DELETE FROM AccountCustomer WHERE  account_id = (SELECT account_id FROM Account WHERE account_status = 'closed')";
+			String query = "DELETE FROM AccountCustomer WHERE account_id IN (SELECT account_id FROM Account WHERE account_status = 'closed')";
 			String query2 = "DELETE FROM Account WHERE account_status = 'closed'";
-			String query3 = "DELETE FROM Customer WHERE NOT EXISTS ( SELECT * FROM AccountCustomer WHERE Customer.tax_id = AccountCustomer.customer_id)"; 
+			String query3 = "DELETE FROM Customer WHERE tax_id NOT IN ( SELECT account_id FROM AccountCustomer)"; 
 	
 			db.queryUpdate(query);
 			db.queryUpdate(query2);
@@ -299,7 +296,7 @@ public class Bank_Options {
 			String query2 = "UPDATE Account SET current_month_interest_added = 'yes' WHERE current_month_interest_added = 'no' AND account_status = 'open'"; 
 			db.queryUpdate(query2);
 			
-			System.out.println("\n Monthly interset was successfully added to all open accounts.");
+			System.out.println("\n Monthly interest was successfully added to all open accounts.");
 		}
 		catch (Exception e) {
 	    	  e.printStackTrace();
