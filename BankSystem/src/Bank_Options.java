@@ -185,7 +185,7 @@ public class Bank_Options {
 	        System.out.println("Today's date: " + todayStr);
 	        System.out.println("Month ago's date: " + formattedmonth);
 			
-			String query = "SELECT account_id, account_type, account_status, closed_date FROM Account WHERE account_status = 'closed' AND "
+			String query = "SELECT account_id, account_type, account_status, closed_date FROM Account2 WHERE account_status = 'closed' AND "
 					+ "closed_date > TO_DATE('" + formattedmonth + "', 'yyyy-mm-dd') AND closed_date <= TO_DATE('" + todayStr + "', 'yyyy-mm-dd')";
 			
 			ResultSet rs = db.querySelect(query);
@@ -240,7 +240,7 @@ public class Bank_Options {
 	      
 			ResultSet rs = db.querySelect(query);
 			
-			System.out.println("Generating Government Report for CustomerID's over the monthly transaction limit of $10k: ");
+			System.out.println("Generating CustomerID's over the monthly transaction limit of $10k: ");
 		
 		    while(rs.next()){	
 		        String customer_id = rs.getString("customer_id");

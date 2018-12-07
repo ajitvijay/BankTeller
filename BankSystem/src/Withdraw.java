@@ -51,7 +51,7 @@ public class Withdraw {
 					frame.dispose();
 					new ATMFunctions(id);
 					withdraw(withdraw_value,account_id,db);
-					System.out.println(pin_tf.getText() + " dollars is the amount sent to account number " + tf.getText());
+					System.out.println(pin_tf.getText() + " dollars is the amount withdrawn from account number " + tf.getText());
 					addTransaction(withdraw_value,tf.getText(),id,db);
 					System.out.println("Transaction added to database");
 
