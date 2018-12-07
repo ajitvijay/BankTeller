@@ -49,23 +49,23 @@ public class TopUp {
 	    }
 	}
 	public TopUp(String id) {
-		JFrame frame = new JFrame("Top Up");
+		final JFrame frame = new JFrame("Top Up");
 		DatabaseConnection db = new DatabaseConnection();
 		
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Account Number(Sender)");
-		JLabel recv = new JLabel("Enter Account Number(Reciever)");
-		JLabel amount = new JLabel("Enter Amount to send");
+		final JLabel sender = new JLabel("Enter Account Number(Sender)");
+		final JLabel recv = new JLabel("Enter Account Number(Reciever)");
+		final JLabel amount = new JLabel("Enter Amount to send");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Top Up");
+		final JButton button = new JButton("Top Up");
 		button.addActionListener(new ActionListener() {
 
 			@Override

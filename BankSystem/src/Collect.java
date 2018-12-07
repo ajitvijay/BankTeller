@@ -51,22 +51,22 @@ public class Collect {
 	    }
 	}
 	public Collect(String id) {
-		JFrame frame = new JFrame("Collect");
-		DatabaseConnection db = new DatabaseConnection();
+		final JFrame frame = new JFrame("Collect");
+		final DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(800,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Pocket Account Number");
-		JLabel recv = new JLabel("Enter Checking/Savings Account Number");
-		JLabel amount = new JLabel("Enter Amount to send");
+		final JLabel sender = new JLabel("Enter Pocket Account Number");
+		final JLabel recv = new JLabel("Enter Checking/Savings Account Number");
+		final JLabel amount = new JLabel("Enter Amount to send");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Collect");
+		final JButton button = new JButton("Collect");
 		button.addActionListener(new ActionListener() {
 
 			@Override

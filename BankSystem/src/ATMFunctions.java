@@ -10,10 +10,10 @@ public class ATMFunctions {
 		final JFrame atm = new JFrame("ATM Functions");
 		atm.setSize(600, 100);
 		
-		JPanel panel = new JPanel();
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel();
+		final JPanel panel2 = new JPanel();
 		
-		JButton deposit = new JButton("Deposit");
+		final JButton deposit = new JButton("Deposit");
 		deposit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -26,7 +26,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton top_up = new JButton("Top Up");
+		final JButton top_up = new JButton("Top Up");
 		top_up.addActionListener(new ActionListener() {
 
 			@Override
@@ -38,7 +38,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton withdraw = new JButton("Withdraw");
+		final JButton withdraw = new JButton("Withdraw");
 		withdraw.addActionListener(new ActionListener() {
 
 			@Override
@@ -50,7 +50,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton purchase = new JButton("Purchase");
+		final JButton purchase = new JButton("Purchase");
 		purchase.addActionListener(new ActionListener() {
 
 			@Override
@@ -62,7 +62,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton transfer = new JButton("Transfer");
+		final JButton transfer = new JButton("Transfer");
 		transfer.addActionListener(new ActionListener() {
 
 			@Override
@@ -74,7 +74,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton collect = new JButton("Collect");
+		final JButton collect = new JButton("Collect");
 		collect.addActionListener(new ActionListener() {
 
 			@Override
@@ -86,7 +86,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton pay_friend = new JButton("Pay Friend");
+		final JButton pay_friend = new JButton("Pay Friend");
 		pay_friend.addActionListener(new ActionListener() {
 
 			@Override
@@ -98,7 +98,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton wire = new JButton("Wire");
+		final JButton wire = new JButton("Wire");
 		wire.addActionListener(new ActionListener() {
 
 			@Override
@@ -110,7 +110,7 @@ public class ATMFunctions {
 			
 		});
 		
-		JButton write_check = new JButton("Write Check");
+		final JButton write_check = new JButton("Write Check");
 		write_check.addActionListener(new ActionListener() {
 
 			@Override

@@ -8,14 +8,14 @@ public class Bank {
 
 	public Bank() {
 		// TODO Auto-generated method stub
-		JFrame bank = new JFrame("Bank Interface");
+		final JFrame bank = new JFrame("Bank Interface");
 		bank.setSize(500,100);
 		bank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
         
-        JPanel logincheck = new JPanel();
-        JButton login = new JButton("Login");
+		final JPanel logincheck = new JPanel();
+		final JButton login = new JButton("Login");
         login.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -38,7 +38,7 @@ public class Bank {
 			}
         	
         });
-        JButton back = new JButton("Go Back");
+        final JButton back = new JButton("Go Back");
         back.addActionListener(new ActionListener() {
 
 			@Override

@@ -50,22 +50,22 @@ public class PayFriend {
 	    }
 	}
 	public PayFriend(String id) {
-		JFrame frame = new JFrame("Pay Friend");
+		final JFrame frame = new JFrame("Pay Friend");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Account Number(Sender)");
-		JLabel recv = new JLabel("Enter Account Number(Reciever)");
-		JLabel amount = new JLabel("Enter Amount to pay friend");
+		final JLabel sender = new JLabel("Enter Account Number(Sender)");
+		final JLabel recv = new JLabel("Enter Account Number(Reciever)");
+		final JLabel amount = new JLabel("Enter Amount to pay friend");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Pay Friend");
+		final JButton button = new JButton("Pay Friend");
 		button.addActionListener(new ActionListener() {
 
 			@Override

@@ -19,18 +19,18 @@ public class Bank_MonthStatement {
 		
 		this.db = new DatabaseConnection();
 		
-		JFrame frame = new JFrame("Generate Customer's Monthly Statement");
+		final JFrame frame = new JFrame("Generate Customer's Monthly Statement");
 		frame.setSize(500,100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel(); // 
-		JLabel cust = new JLabel("Enter Customer ID: ");
-		JTextField cust_input = new JTextField(10);
+		final JPanel panel = new JPanel(); // 
+		final JLabel cust = new JLabel("Enter Customer ID: ");
+		final JTextField cust_input = new JTextField(10);
 		panel.add(BorderLayout.NORTH,cust); // Components Added using Flow Layout
 		panel.add(BorderLayout.AFTER_LINE_ENDS,cust_input);
 		
-		JPanel enterpanel = new JPanel();
-        JButton enter = new JButton("Enter");
+		final JPanel enterpanel = new JPanel();
+		final JButton enter = new JButton("Enter");
         enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

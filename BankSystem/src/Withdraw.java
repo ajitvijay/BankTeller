@@ -29,17 +29,17 @@ public class Withdraw {
 	    }
 	}
 	public Withdraw(String id) {
-		JFrame frame = new JFrame("Withdraw");
+		final JFrame frame = new JFrame("Withdraw");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JLabel label = new JLabel("Enter Account Number");
-		JLabel send = new JLabel("Amount To Withdraw");
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
+		final JPanel panel = new JPanel(); // 
+		final JLabel label = new JLabel("Enter Account Number");
+		final JLabel send = new JLabel("Amount To Withdraw");
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
 		
-		JButton depo_btn = new JButton("Withdraw Money");
+		final JButton depo_btn = new JButton("Withdraw Money");
 	    depo_btn.addActionListener(new ActionListener() {
 
 				@Override

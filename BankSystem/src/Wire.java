@@ -34,22 +34,22 @@ public class Wire {
 	    }
 	}
 	public Wire(String id) {
-		JFrame frame = new JFrame("Wire");
+		final JFrame frame = new JFrame("Wire");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Account Number(Sender)");
-		JLabel recv = new JLabel("Enter Account Number(Reciever)");
-		JLabel amount = new JLabel("Enter Amount to wire");
+		final JLabel sender = new JLabel("Enter Account Number(Sender)");
+		final JLabel recv = new JLabel("Enter Account Number(Reciever)");
+		final JLabel amount = new JLabel("Enter Amount to wire");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Wire");
+		final JButton button = new JButton("Wire");
 		button.addActionListener(new ActionListener() {
 
 			@Override

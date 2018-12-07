@@ -10,36 +10,36 @@ public class Bank_AddAccount {
 	public Bank_AddAccount() {
 		this.db = new DatabaseConnection();
 		
-		JFrame frame = new JFrame("Add a new account, using existing customer ID");
+		final JFrame frame = new JFrame("Add a new account, using existing customer ID");
 		frame.setSize(550,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel(); // 
+		final JPanel panel = new JPanel(); // 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		JLabel cust = new JLabel("Enter EXISTING Customer ID: ");
-		JTextField cust_input = new JTextField(10);
+		final JLabel cust = new JLabel("Enter EXISTING Customer ID: ");
+		final JTextField cust_input = new JTextField(10);
 		
-		JLabel acc = new JLabel("Enter NEW Account ID: ");
-		JTextField acc_input = new JTextField(10);
+		final JLabel acc = new JLabel("Enter NEW Account ID: ");
+		final JTextField acc_input = new JTextField(10);
 		
-		JLabel branch = new JLabel("Enter NEW Account Branch Name: ");
-		JTextField branch_input = new JTextField(10);
+		final JLabel branch = new JLabel("Enter NEW Account Branch Name: ");
+		final JTextField branch_input = new JTextField(10);
 		
-		JLabel type = new JLabel("Enter NEW Account Type (interest_checking, student_checking, savings, or pocket: ");
-		JTextField type_input = new JTextField(10);
+		final JLabel type = new JLabel("Enter NEW Account Type (interest_checking, student_checking, savings, or pocket: ");
+		final JTextField type_input = new JTextField(10);
 		
-		JLabel bal = new JLabel("Enter NEW Account Balance ");
-		JTextField bal_input = new JTextField(10);
+		final JLabel bal = new JLabel("Enter NEW Account Balance ");
+		final JTextField bal_input = new JTextField(10);
 		
-		JLabel rate = new JLabel("Enter NEW Account Interest Rate: ");
-		JTextField rate_input = new JTextField(10);
+		final JLabel rate = new JLabel("Enter NEW Account Interest Rate: ");
+		final JTextField rate_input = new JTextField(10);
 		
-		JLabel fee = new JLabel("Enter NEW Account Monthly Fee (POCKET ONLY or NULL): ");
-		JTextField fee_input = new JTextField(10);
+		final JLabel fee = new JLabel("Enter NEW Account Monthly Fee (POCKET ONLY or NULL): ");
+		final JTextField fee_input = new JTextField(10);
 		
-		JLabel link = new JLabel("Enter NEW Account Linked Account (POCKET ONLY or NULL): ");
-		JTextField link_input = new JTextField(10);
+		final JLabel link = new JLabel("Enter NEW Account Linked Account (POCKET ONLY or NULL): ");
+		final JTextField link_input = new JTextField(10);
 	
 	
 		panel.add(BorderLayout.NORTH,cust); // Components Added using Flow Layout
@@ -66,8 +66,8 @@ public class Bank_AddAccount {
 		panel.add(BorderLayout.AFTER_LAST_LINE, link);
 		panel.add(BorderLayout.AFTER_LINE_ENDS, link_input);
 		
-		JPanel enterpanel = new JPanel();
-        JButton enter = new JButton("Enter");
+		final JPanel enterpanel = new JPanel();
+		final JButton enter = new JButton("Enter");
         enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

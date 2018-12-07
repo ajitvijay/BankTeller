@@ -41,17 +41,17 @@ public class Purchase {
 	    }
 	}
 	public Purchase(String id) {
-		JFrame frame = new JFrame("Purchase");
+		final JFrame frame = new JFrame("Purchase");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(400,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JLabel label = new JLabel("Enter Price of Purchase");
-		JLabel send = new JLabel("Enter Customer ID");
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
+		final JPanel panel = new JPanel(); // 
+		final JLabel label = new JLabel("Enter Price of Purchase");
+		final JLabel send = new JLabel("Enter Customer ID");
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
 		
-		JButton depo_btn = new JButton("Purchase Item");
+		final JButton depo_btn = new JButton("Purchase Item");
 	    depo_btn.addActionListener(new ActionListener() {
 
 				@Override

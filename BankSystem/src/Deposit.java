@@ -31,17 +31,17 @@ public class Deposit {
 	    }
 	}
 	public Deposit(String id) {
-		JFrame frame = new JFrame("Deposit");
+		final JFrame frame = new JFrame("Deposit");
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		DatabaseConnection db = new DatabaseConnection();
 		
-		JPanel panel = new JPanel();
-		JLabel send = new JLabel("Account Number money is going to");
-		JLabel money 	= new JLabel("Enter Amount to Deposit");
-        JTextField tf = new JTextField(10); // accepts up to 10 characters	
-        JTextField pin_tf = new JTextField(10);
-        JButton depo_btn = new JButton("Deposit");
+		final JPanel panel = new JPanel();
+		final JLabel send = new JLabel("Account Number money is going to");
+		final JLabel money 	= new JLabel("Enter Amount to Deposit");
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters	
+		final JTextField pin_tf = new JTextField(10);
+		final JButton depo_btn = new JButton("Deposit");
         depo_btn.addActionListener(new ActionListener() {
 
 			@Override
