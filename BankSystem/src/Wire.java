@@ -1,9 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.*;
 
 public class Wire {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'Wire')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public void wire(String value, String account_id1, String account_id2, DatabaseConnection db) {
 		try {
 			String temp = value;
@@ -20,7 +33,7 @@ public class Wire {
 	    	  e.printStackTrace();
 	    }
 	}
-	public Wire() {
+	public Wire(String id) {
 		JFrame frame = new JFrame("Wire");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
@@ -46,9 +59,11 @@ public class Wire {
 				String recv = pin_tf.getText();
 			    String moolah = money.getText();
 				frame.dispose();
-				new ATMFunctions();
+				new ATMFunctions(id);
 				wire(moolah,send,recv,db);
 				System.out.println(tf.getText() + " wires " + pin_tf.getText() + " " + money.getText() + " dollars");
+				addTransaction(money.getText(),tf.getText(),id,db);
+				System.out.println("Transaction added to database");
 			}
 			
 		});

@@ -3,8 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Withdraw {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'Withdraw')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public void withdraw(String value, String account_id, DatabaseConnection db) {
 		try {
 			String query2 = "UPDATE Account SET balance = balance - "+value +" WHERE account_id = '"+account_id+"'";
@@ -15,7 +28,7 @@ public class Withdraw {
 	    	  e.printStackTrace();
 	    }
 	}
-	public Withdraw() {
+	public Withdraw(String id) {
 		JFrame frame = new JFrame("Withdraw");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(400,400);
@@ -33,12 +46,14 @@ public class Withdraw {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					
-					String deposit_value = pin_tf.getText();
+					String withdraw_value = pin_tf.getText();
 				    String account_id = tf.getText();
 					frame.dispose();
-					new ATMFunctions();
-					withdraw(deposit_value,account_id,db);
+					new ATMFunctions(id);
+					withdraw(withdraw_value,account_id,db);
 					System.out.println(pin_tf.getText() + " dollars is the amount sent to account number " + tf.getText());
+					addTransaction(withdraw_value,tf.getText(),id,db);
+					System.out.println("Transaction added to database");
 
 				}
 	        	

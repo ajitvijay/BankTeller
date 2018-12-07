@@ -3,8 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Purchase {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'Purchase')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public void purchase(String price, String customer_id, DatabaseConnection db) {
 		try {
 			String query = "SELECT account_id FROM AccountCustomer WHERE customer_id = '"+customer_id+"' AND account_type = 'pocket'";
@@ -15,6 +28,8 @@ public class Purchase {
 				System.out.println(query2);
 				db.queryUpdate(query2);
 				System.out.println(price + " dollars is the amount spent by customer " + customer_id);
+				addTransaction(price,account_id,customer_id,db);
+				System.out.println("Transaction added to database");
 			}
 			else {
 				System.out.println("Can't make transaction");
@@ -25,7 +40,7 @@ public class Purchase {
 	    	  e.printStackTrace();
 	    }
 	}
-	public Purchase() {
+	public Purchase(String id) {
 		JFrame frame = new JFrame("Purchase");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(400,200);
@@ -43,11 +58,13 @@ public class Purchase {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					
-					String deposit_value = tf.getText();
+					String purchase_value = tf.getText();
 				    String customer_id = pin_tf.getText();
 					frame.dispose();
-					new ATMFunctions();
-					purchase(deposit_value,customer_id,db);
+					new ATMFunctions(id);
+					purchase(purchase_value,customer_id,db);
+					System.out.println(customer_id + " purchased an item for " + purchase_value + " dollars");
+					
 					
 
 				}

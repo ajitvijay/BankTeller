@@ -3,8 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class WriteCheck {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'Write Check')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public void write_check(String value, String account_id, DatabaseConnection db) {
 		try {
 			String query2 = "UPDATE Account SET balance = balance - "+value +" WHERE account_id = '"+account_id+"'";
@@ -15,7 +28,7 @@ public class WriteCheck {
 	    	  e.printStackTrace();
 	    }
 	}
-	public WriteCheck() {
+	public WriteCheck(String id) {
 		JFrame frame = new JFrame("Write Check");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
@@ -42,9 +55,11 @@ public class WriteCheck {
 				String check_value = money.getText();
 			    String account_id = tf.getText();
 				frame.dispose();
-				new ATMFunctions();
+				new ATMFunctions(id);
 				write_check(check_value,account_id,db);
 				System.out.println(tf.getText() + " writes check " + pin_tf.getText() + " for " + money.getText() + " dollars");
+				addTransaction(money.getText(),tf.getText(),id,db);
+				System.out.println("Transaction added to database");
 			
 			}
 			

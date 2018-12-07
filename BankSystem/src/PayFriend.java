@@ -3,8 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PayFriend {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'PayFriend')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public String typeofAccount(String account_id, DatabaseConnection db) {
 		String query = "SELECT account_type FROM Account WHERE account_id = '" + account_id + "'";
 		ResultSet rs = db.querySelect(query);
@@ -36,7 +49,7 @@ public class PayFriend {
 	    	  e.printStackTrace();
 	    }
 	}
-	public PayFriend() {
+	public PayFriend(String id) {
 		JFrame frame = new JFrame("Pay Friend");
 		DatabaseConnection db = new DatabaseConnection();
 		frame.setSize(700,200);
@@ -65,8 +78,10 @@ public class PayFriend {
 				if(acc1.trim().equals("pocket") && acc2.trim().equals("pocket")) {
 					payfriend(money.getText(),tf.getText(),pin_tf.getText(),db);
 					frame.dispose();
-					new ATMFunctions();
+					new ATMFunctions(id);
 					System.out.println(tf.getText() + " pays " + pin_tf.getText() + " " + money.getText() + " dollars");
+					addTransaction(money.getText(),tf.getText(),id,db);
+					System.out.println("Transaction added to database");
 				}
 				else {
 					System.out.println("Both accounts must be pocket accounts");

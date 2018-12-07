@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class ATMFunctions {
-	public ATMFunctions() {
-		JFrame atm = new JFrame("ATM Functions");
+	public ATMFunctions(String id) {
+		final JFrame atm = new JFrame("ATM Functions");
 		atm.setSize(600, 100);
 		
 		JPanel panel = new JPanel();
@@ -20,7 +20,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Deposit();
+				new Deposit(id);
 				
 			}
 			
@@ -33,7 +33,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new TopUp();
+				new TopUp(id);
 			}
 			
 		});
@@ -45,7 +45,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Withdraw();
+				new Withdraw(id);
 			}
 			
 		});
@@ -57,7 +57,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Purchase();
+				new Purchase(id);
 			}
 			
 		});
@@ -69,7 +69,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Transfer();
+				new Transfer(id);
 			}
 			
 		});
@@ -81,7 +81,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Collect();
+				new Collect(id);
 			}
 			
 		});
@@ -93,7 +93,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new PayFriend();
+				new PayFriend(id);
 			}
 			
 		});
@@ -105,7 +105,7 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Wire();
+				new Wire(id);
 			}
 			
 		});
@@ -117,22 +117,11 @@ public class ATMFunctions {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new WriteCheck();
+				new WriteCheck(id);
 			}
 			
 		});
 		
-		JButton accrue_interest = new JButton("Accrue Interest");
-		accrue_interest.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				atm.dispose();
-				new AccrueInterest();
-			}
-			
-		});
 		
 		panel.add(BorderLayout.NORTH,deposit); 
 		panel.add(BorderLayout.AFTER_LINE_ENDS,top_up);
@@ -144,7 +133,6 @@ public class ATMFunctions {
 		panel2.add(BorderLayout.AFTER_LINE_ENDS,pay_friend);
 		panel2.add(BorderLayout.AFTER_LAST_LINE, wire);
 		panel2.add(BorderLayout.AFTER_LINE_ENDS,write_check);
-		panel2.add(BorderLayout.AFTER_LINE_ENDS,accrue_interest);
 		
 		
 		atm.getContentPane().add(BorderLayout.NORTH, panel);

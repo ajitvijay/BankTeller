@@ -43,7 +43,7 @@ public class ATM {
 					boolean temp = validate(id,customer_id,pin,db);
 					if((temp)) {
 						atm.dispose();
-						new ATMFunctions();
+						new ATMFunctions(customer_id);
 						System.out.println("Login Successful");
 					}
 					else {
