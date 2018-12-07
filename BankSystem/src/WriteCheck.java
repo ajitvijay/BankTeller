@@ -31,7 +31,7 @@ public class WriteCheck {
 	public WriteCheck(String id) {
 		final JFrame frame = new JFrame("Write Check");
 		DatabaseConnection db = new DatabaseConnection();
-		frame.setSize(700,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final JPanel panel = new JPanel(); // 
 		final JPanel panel2 = new JPanel();
