@@ -52,7 +52,7 @@ public class Transfer {
 		final JFrame frame = new JFrame("Transfer");
 		DatabaseConnection db = new DatabaseConnection();
 		
-		frame.setSize(700,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final JPanel panel = new JPanel(); // 
 		final JPanel panel2 = new JPanel();

@@ -53,7 +53,7 @@ public class Collect {
 	public Collect(String id) {
 		final JFrame frame = new JFrame("Collect");
 		final DatabaseConnection db = new DatabaseConnection();
-		frame.setSize(800,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final JPanel panel = new JPanel(); // 
 		final JPanel panel2 = new JPanel();

@@ -36,7 +36,7 @@ public class Wire {
 	public Wire(String id) {
 		final JFrame frame = new JFrame("Wire");
 		DatabaseConnection db = new DatabaseConnection();
-		frame.setSize(700,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final JPanel panel = new JPanel(); // 
 		final JPanel panel2 = new JPanel();
