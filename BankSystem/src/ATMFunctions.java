@@ -6,133 +6,122 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class ATMFunctions {
-	public ATMFunctions() {
-		JFrame atm = new JFrame("ATM Functions");
+	public ATMFunctions(String id) {
+		final JFrame atm = new JFrame("ATM Functions");
 		atm.setSize(600, 100);
 		
-		JPanel panel = new JPanel();
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel();
+		final JPanel panel2 = new JPanel();
 		
-		JButton deposit = new JButton("Deposit");
+		final JButton deposit = new JButton("Deposit");
 		deposit.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Deposit();
+				new Deposit(id);
 				
 			}
 			
 		});
 		
-		JButton top_up = new JButton("Top Up");
+		final JButton top_up = new JButton("Top Up");
 		top_up.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new TopUp();
+				new TopUp(id);
 			}
 			
 		});
 		
-		JButton withdraw = new JButton("Withdraw");
+		final JButton withdraw = new JButton("Withdraw");
 		withdraw.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Withdraw();
+				new Withdraw(id);
 			}
 			
 		});
 		
-		JButton purchase = new JButton("Purchase");
+		final JButton purchase = new JButton("Purchase");
 		purchase.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Purchase();
+				new Purchase(id);
 			}
 			
 		});
 		
-		JButton transfer = new JButton("Transfer");
+		final JButton transfer = new JButton("Transfer");
 		transfer.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Transfer();
+				new Transfer(id);
 			}
 			
 		});
 		
-		JButton collect = new JButton("Collect");
+		final JButton collect = new JButton("Collect");
 		collect.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Collect();
+				new Collect(id);
 			}
 			
 		});
 		
-		JButton pay_friend = new JButton("Pay Friend");
+		final JButton pay_friend = new JButton("Pay Friend");
 		pay_friend.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new PayFriend();
+				new PayFriend(id);
 			}
 			
 		});
 		
-		JButton wire = new JButton("Wire");
+		final JButton wire = new JButton("Wire");
 		wire.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new Wire();
+				new Wire(id);
 			}
 			
 		});
 		
-		JButton write_check = new JButton("Write Check");
+		final JButton write_check = new JButton("Write Check");
 		write_check.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				atm.dispose();
-				new WriteCheck();
+				new WriteCheck(id);
 			}
 			
 		});
 		
-		JButton accrue_interest = new JButton("Accrue Interest");
-		accrue_interest.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				atm.dispose();
-				new AccrueInterest();
-			}
-			
-		});
 		
 		panel.add(BorderLayout.NORTH,deposit); 
 		panel.add(BorderLayout.AFTER_LINE_ENDS,top_up);
@@ -144,7 +133,6 @@ public class ATMFunctions {
 		panel2.add(BorderLayout.AFTER_LINE_ENDS,pay_friend);
 		panel2.add(BorderLayout.AFTER_LAST_LINE, wire);
 		panel2.add(BorderLayout.AFTER_LINE_ENDS,write_check);
-		panel2.add(BorderLayout.AFTER_LINE_ENDS,accrue_interest);
 		
 		
 		atm.getContentPane().add(BorderLayout.NORTH, panel);

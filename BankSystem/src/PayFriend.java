@@ -3,8 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PayFriend {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'PayFriend')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public String typeofAccount(String account_id, DatabaseConnection db) {
 		String query = "SELECT account_type FROM Account WHERE account_id = '" + account_id + "'";
 		ResultSet rs = db.querySelect(query);
@@ -36,23 +49,23 @@ public class PayFriend {
 	    	  e.printStackTrace();
 	    }
 	}
-	public PayFriend() {
-		JFrame frame = new JFrame("Pay Friend");
+	public PayFriend(String id) {
+		final JFrame frame = new JFrame("Pay Friend");
 		DatabaseConnection db = new DatabaseConnection();
-		frame.setSize(700,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Account Number(Sender)");
-		JLabel recv = new JLabel("Enter Account Number(Reciever)");
-		JLabel amount = new JLabel("Enter Amount to pay friend");
+		final JLabel sender = new JLabel("Enter Account Number(Sender)");
+		final JLabel recv = new JLabel("Enter Account Number(Reciever)");
+		final JLabel amount = new JLabel("Enter Amount to pay friend");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Pay Friend");
+		final JButton button = new JButton("Pay Friend");
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -65,8 +78,10 @@ public class PayFriend {
 				if(acc1.trim().equals("pocket") && acc2.trim().equals("pocket")) {
 					payfriend(money.getText(),tf.getText(),pin_tf.getText(),db);
 					frame.dispose();
-					new ATMFunctions();
+					new ATMFunctions(id);
 					System.out.println(tf.getText() + " pays " + pin_tf.getText() + " " + money.getText() + " dollars");
+					addTransaction(money.getText(),tf.getText(),id,db);
+					System.out.println("Transaction added to database");
 				}
 				else {
 					System.out.println("Both accounts must be pocket accounts");

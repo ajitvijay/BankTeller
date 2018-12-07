@@ -11,12 +11,12 @@ public class ATM {
 	public ATM() {
 		// TODO Auto-generated method stub
 		//new ATMFunctions();
-		JFrame atm = new JFrame("ATM Interface");
+		final JFrame atm = new JFrame("ATM Interface");
 		atm.setSize(500,100);
 		atm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		DatabaseConnection db = new DatabaseConnection();
+		final DatabaseConnection db = new DatabaseConnection();
 		
-		JPanel panel = new JPanel(); // 
+		final JPanel panel = new JPanel(); // 
 //        JLabel label = new JLabel("Enter Account Number");
 //        JLabel pin 	= new JLabel("Enter Pin");
 //        JTextField tf = new JTextField(10); // accepts up to 10 characters
@@ -26,8 +26,8 @@ public class ATM {
 //        panel.add(BorderLayout.AFTER_LAST_LINE, pin);
 //        panel.add(BorderLayout.AFTER_LINE_ENDS,pin_tf);
         
-        JPanel logincheck = new JPanel();
-        JButton login = new JButton("Login");
+        final JPanel logincheck = new JPanel();
+        final JButton login = new JButton("Login");
         login.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -43,7 +43,7 @@ public class ATM {
 					boolean temp = validate(id,customer_id,pin,db);
 					if((temp)) {
 						atm.dispose();
-						new ATMFunctions();
+						new ATMFunctions(customer_id);
 						System.out.println("Login Successful");
 					}
 					else {
@@ -59,7 +59,7 @@ public class ATM {
 			}
         	
         });
-        JButton back = new JButton("Go Back");
+        final JButton back = new JButton("Go Back");
         back.addActionListener(new ActionListener() {
 
 			@Override

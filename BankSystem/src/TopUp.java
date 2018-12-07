@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TopUp {
-	public void addTransaction(String diff,String account_id, DatabaseConnection db) {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
 		Date today = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String todayStr = dateFormat.format(today);
         //";
         String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
-        + diff + ",'" + account_id + "', " + null + ", " + "'TopUP')";
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'TopUP')";
         db.queryUpdate(query);
         System.out.println("Transaction successfully added");
 	}
@@ -48,24 +48,24 @@ public class TopUp {
 	    	  e.printStackTrace();
 	    }
 	}
-	public TopUp() {
-		JFrame frame = new JFrame("Top Up");
+	public TopUp(String id) {
+		final JFrame frame = new JFrame("Top Up");
 		DatabaseConnection db = new DatabaseConnection();
 		
-		frame.setSize(700,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Account Number(Sender)");
-		JLabel recv = new JLabel("Enter Account Number(Reciever)");
-		JLabel amount = new JLabel("Enter Amount to send");
+		final JLabel sender = new JLabel("Enter Account Number(Sender)");
+		final JLabel recv = new JLabel("Enter Account Number(Reciever)");
+		final JLabel amount = new JLabel("Enter Amount to send");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Top Up");
+		final JButton button = new JButton("Top Up");
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -78,9 +78,10 @@ public class TopUp {
 				if((acc1.trim().equals("interest_checking") || (acc1.trim().equals("student_checking")) || acc1.trim().equals("savings")) && acc2.trim().equals("pocket")) {
 					topUp(money.getText(),tf.getText(),pin_tf.getText(), db);
 					frame.dispose();
-					new ATMFunctions();
+					new ATMFunctions(id);
 					System.out.println(tf.getText() + " sent " + money.getText() + " dollars to account num " + pin_tf.getText());
-					addTransaction(money.getText(),tf.getText(),db);
+					addTransaction(money.getText(),tf.getText(),id,db);
+					System.out.println("Transaction added to database");
 				}
 				else {
 					System.out.println("Can't transfer money");

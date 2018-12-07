@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deposit {
-	public void addTransaction(String diff,String account_id,String customerid, DatabaseConnection db) {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
 		Date today = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String todayStr = dateFormat.format(today);
         //";
         String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
-        + diff + ",'" + account_id + "', '" + customerid + "', " + "'Deposit')";
+        + diff + ",'" + account_id + "', '" + customer_id + "', " + "'Deposit')";
         db.queryUpdate(query);
         System.out.println("Transaction successfully added");
 	}
@@ -30,19 +30,18 @@ public class Deposit {
 	    	  e.printStackTrace();
 	    }
 	}
-	public Deposit() {
-		JFrame frame = new JFrame("Deposit");
-		ATM atm = new ATM();
+	public Deposit(String id) {
+		final JFrame frame = new JFrame("Deposit");
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		DatabaseConnection db = new DatabaseConnection();
 		
-		JPanel panel = new JPanel();
-		JLabel send = new JLabel("Account Number money is going to");
-		JLabel money 	= new JLabel("Enter Amount to Deposit");
-        JTextField tf = new JTextField(10); // accepts up to 10 characters	
-        JTextField pin_tf = new JTextField(10);
-        JButton depo_btn = new JButton("Deposit");
+		final JPanel panel = new JPanel();
+		final JLabel send = new JLabel("Account Number money is going to");
+		final JLabel money 	= new JLabel("Enter Amount to Deposit");
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters	
+		final JTextField pin_tf = new JTextField(10);
+		final JButton depo_btn = new JButton("Deposit");
         depo_btn.addActionListener(new ActionListener() {
 
 			@Override
@@ -51,10 +50,10 @@ public class Deposit {
 				String deposit_value = tf.getText();
 			    String account_id = pin_tf.getText();
 				frame.dispose();
-				new ATMFunctions();
+				new ATMFunctions(id);
 				deposit(deposit_value,account_id,db);
 				System.out.println(tf.getText() + " dollars is the amount deposited");
-				addTransaction(deposit_value, account_id,atm.customerid,db);
+				addTransaction(deposit_value, account_id,id,db);
 				System.out.println("Transaction added to database");
 				
 			}

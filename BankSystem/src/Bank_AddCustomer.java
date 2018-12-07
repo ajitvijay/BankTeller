@@ -9,30 +9,30 @@ public class Bank_AddCustomer {
 	public Bank_AddCustomer() {
 		this.db = new DatabaseConnection();
 		
-		JFrame frame = new JFrame("Add a new account, using existing customer ID");
+		final JFrame frame = new JFrame("Add a new account, using existing customer ID");
 		frame.setSize(550,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel(); // 
+		final JPanel panel = new JPanel(); // 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		JLabel cust = new JLabel("Enter NEW Customer ID: ");
-		JTextField cust_input = new JTextField(10);
+		final JLabel cust = new JLabel("Enter NEW Customer ID: ");
+		final JTextField cust_input = new JTextField(10);
 		
-		JLabel acc = new JLabel("Enter EXISTING Account ID: ");
-		JTextField acc_input = new JTextField(10);
+		final JLabel acc = new JLabel("Enter EXISTING Account ID: ");
+		final JTextField acc_input = new JTextField(10);
 		
-		JLabel type = new JLabel("Enter EXISTING Account TYPE [savings, student_checking, interest_checking, pocket]: ");
-		JTextField type_input = new JTextField(10);
+		final JLabel type = new JLabel("Enter EXISTING Account TYPE [savings, student_checking, interest_checking, pocket]: ");
+		final JTextField type_input = new JTextField(10);
 		
-		JLabel name = new JLabel("Enter NEW Customer Name: ");
-		JTextField name_input = new JTextField(10);
+		final JLabel name = new JLabel("Enter NEW Customer Name: ");
+		final JTextField name_input = new JTextField(10);
 		
-		JLabel add = new JLabel("Enter NEW Customer Address: ");
-		JTextField add_input = new JTextField(10);
+		final JLabel add = new JLabel("Enter NEW Customer Address: ");
+		final JTextField add_input = new JTextField(10);
 		
-		JLabel pin = new JLabel("Enter NEW Customer Pin: ");
-		JTextField pin_input = new JTextField(10);
+		final JLabel pin = new JLabel("Enter NEW Customer Pin: ");
+		final JTextField pin_input = new JTextField(10);
 
 	
 		panel.add(BorderLayout.NORTH,cust); // Components Added using Flow Layout
@@ -53,8 +53,8 @@ public class Bank_AddCustomer {
 		panel.add(BorderLayout.AFTER_LAST_LINE, pin);
 		panel.add(BorderLayout.AFTER_LINE_ENDS, pin_input);
 
-		JPanel enterpanel = new JPanel();
-        JButton enter = new JButton("Enter");
+		final JPanel enterpanel = new JPanel();
+		final JButton enter = new JButton("Enter");
         enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

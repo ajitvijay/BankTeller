@@ -1,9 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.*;
 
 public class Transfer {
+	public void addTransaction(String diff,String account_id,String customer_id, DatabaseConnection db) {
+		Date today = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayStr = dateFormat.format(today);
+        //";
+        String query = "INSERT INTO Transaction(Transaction_Date, Difference, Account_Id, Customer_Id, Transaction_Info)" + " Values (TO_DATE('" + todayStr + "', 'yyyy-mm-dd'), "
+        + diff + ",'" + account_id + "', " + customer_id + ", " + "'Transfer')";
+        db.queryUpdate(query);
+        System.out.println("Transaction successfully added");
+	}
 	public String typeofAccount(String account_id, DatabaseConnection db) {
 		String query = "SELECT account_type FROM Account WHERE account_id = '" + account_id + "'";
 		ResultSet rs = db.querySelect(query);
@@ -35,24 +48,24 @@ public class Transfer {
 	    	  e.printStackTrace();
 	    }
 	}
-	public Transfer() {
-		JFrame frame = new JFrame("Transfer");
+	public Transfer(String id) {
+		final JFrame frame = new JFrame("Transfer");
 		DatabaseConnection db = new DatabaseConnection();
 		
-		frame.setSize(700,200);
+		frame.setSize(900,200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel(); // 
-		JPanel panel2 = new JPanel();
+		final JPanel panel = new JPanel(); // 
+		final JPanel panel2 = new JPanel();
 		
-		JLabel sender = new JLabel("Enter Account Number(Sender)");
-		JLabel recv = new JLabel("Enter Account Number(Reciever)");
-		JLabel amount = new JLabel("Enter Amount to transfer");
+		final JLabel sender = new JLabel("Enter Account Number(Sender)");
+		final JLabel recv = new JLabel("Enter Account Number(Reciever)");
+		final JLabel amount = new JLabel("Enter Amount to transfer");
 		
-		JTextField tf = new JTextField(10); // accepts up to 10 characters
-		JTextField pin_tf = new JTextField(10);
-		JTextField money = new JTextField(10);
+		final JTextField tf = new JTextField(10); // accepts up to 10 characters
+		final JTextField pin_tf = new JTextField(10);
+		final JTextField money = new JTextField(10);
 		
-		JButton button = new JButton("Transfer");
+		final JButton button = new JButton("Transfer");
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,8 +76,10 @@ public class Transfer {
 				else {
 					transfer(money.getText(),tf.getText(), pin_tf.getText(), db);
 					frame.dispose();
-					new ATMFunctions();
+					new ATMFunctions(id);
 					System.out.println(tf.getText() + " transfers " + money.getText() + " dollars to " + pin_tf.getText());
+					addTransaction(money.getText(),tf.getText(),id,db);
+					System.out.println("Transaction added to database");
 				}
 				
 			}
