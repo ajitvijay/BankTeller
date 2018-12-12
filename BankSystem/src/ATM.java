@@ -78,43 +78,42 @@ public class ATM {
 		atm.setVisible(true);
 	}
 	public boolean validate(String account_id, String customer_id, String pin, DatabaseConnection db) {
-		return true;
-//		String query = "SELECT account_id, customer_id FROM AccountCustomer WHERE account_id = '" + 
-//	account_id + "'" + "AND customer_id = '" + customer_id + "'";
-//		String query2 = "SELECT PIN from Customer WHERE pin = '" + pin + "'" +"AND tax_id = '" + customer_id + "'";
-//		ResultSet rs = db.querySelect(query);
-//		ResultSet rs1 = db.querySelect(query2);
-//		boolean check = false;
-//		boolean check2 = false;
-//		try {
-//			if (rs.isBeforeFirst()) check = true;
-//			else check = false;
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return false;
-//		}
-//		try {
-//			if(rs1.isBeforeFirst()) check2 = true;
-//			else check2 = false;
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return false;
-//		}
-//		try {
-//			rs.close();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		try {
-//			rs1.close();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		if((check) && (check2)) return true;
-//		else return false;
+		String query = "SELECT account_id, customer_id FROM AccountCustomer WHERE account_id = '" + 
+	account_id + "'" + "AND customer_id = '" + customer_id + "'";
+		String query2 = "SELECT PIN from Customer WHERE pin = '" + pin + "'" +"AND tax_id = '" + customer_id + "'";
+		ResultSet rs = db.querySelect(query);
+		ResultSet rs1 = db.querySelect(query2);
+		boolean check = false;
+		boolean check2 = false;
+		try {
+			if (rs.isBeforeFirst()) check = true;
+			else check = false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		try {
+			if(rs1.isBeforeFirst()) check2 = true;
+			else check2 = false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs1.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if((check) && (check2)) return true;
+		else return false;
 	}
 }
